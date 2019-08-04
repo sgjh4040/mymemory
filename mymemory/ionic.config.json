@@ -1,5 +1,7 @@
 {
   "name": "mymemory",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
