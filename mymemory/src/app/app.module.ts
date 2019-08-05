@@ -12,13 +12,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { MoviePageModule } from './search/api/movie/movie.module';
 
 export function jwtOptionsFactory(storage) {
   return {
     tokenGetter: () => {
       return storage.get('access_token');
     },
-    whitelistedDomains: ['localhost:5000']
+    whitelistedDomains: ['172.30.1.38:5000']
   }
 }
  
@@ -28,6 +29,7 @@ export function jwtOptionsFactory(storage) {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   HttpClientModule,
+  MoviePageModule,
   IonicStorageModule.forRoot(),
   JwtModule.forRoot({
     jwtOptionsProvider: {

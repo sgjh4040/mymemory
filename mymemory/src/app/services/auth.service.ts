@@ -70,13 +70,13 @@ export class AuthService {
       this.authenticationState.next(false);
     });
   }
- 
+ //test
   getSpecialData() {
     return this.http.get(`${this.url}/api/special`).pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {
-          this.showAlert('You are not authorized for this!');
+          this.showAlert('로그인 되어있지 않습니다!');
           this.logout();
         }
         throw new Error(e);
@@ -91,7 +91,7 @@ export class AuthService {
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
-      header: 'Error',
+      header: '에러',
       buttons: ['OK']
     });
     alert.then(alert => alert.present());

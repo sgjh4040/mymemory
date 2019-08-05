@@ -1,0 +1,22 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>새로운 리뷰북</ion-title>
+      <ion-buttons slot="end">
+          <ion-button type="submit" (click)="onSubmit()"[disabled]="!reviewlistForm.valid">
+            저장
+          </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="reviewlistForm">
+      <ion-item>
+        <ion-label position="fixed">이름</ion-label>
+        <ion-input type="email" formControlName="title" text-right></ion-input>
+      </ion-item>
+    </form>
+  </ion-content>
