@@ -1,0 +1,95 @@
+<ion-header translucent>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>나의 리뷰</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        편집
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid *ngIf="detail_review">
+    <ion-row>
+      <ion-col size='4'>
+        <ion-img src="https://image.tmdb.org/t/p/w500{{detail_review.poster_path}}">
+        </ion-img>
+      </ion-col>
+      <ion-col size='8'>
+
+        <ion-text>
+          <h3>{{detail_review.title}}</h3>
+        </ion-text>
+        <ion-text>
+          <p>사공정훈</p>
+        </ion-text>
+        <ion-text>
+          <p>{{detail_review.release_date|date:'yyyy-MM'}}</p>
+        </ion-text>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size='12'>
+
+
+        <ion-item>
+          <ion-label>장르</ion-label>
+          <ion-note slot="end" color="success">{{detail_review.genre}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>관람일</ion-label>
+          <ion-note slot="end" color="success">{{detail_review.watch_date|date:'yyyy-MM-dd'}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">줄거리</ion-label>
+          <ion-text disabled rows="3">{{detail_review.overview}} </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">명대사</ion-label>
+          <ion-text disabled rows="3">{{detail_review.famouse_line}} </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">감상평</ion-label>
+          <ion-text disabled rows="3">{{detail_review.review}} </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">태그</ion-label>
+          <p>
+            <ion-chip color={{colors[i%6]}} *ngFor="let tag of tags;let i=index;">
+              <ion-label>{{tag}}</ion-label>
+            </ion-chip>
+          </p>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button (click)="openDeleteAlert()">
+      <ion-icon name="trash" color="danger"></ion-icon>
+      <ion-label>삭제</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="openShareAlert()">
+      <ion-icon name="share-alt"></ion-icon>
+      <ion-label>공유</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button>
+      <ion-icon name="share"></ion-icon>
+      <ion-label>카드공유</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

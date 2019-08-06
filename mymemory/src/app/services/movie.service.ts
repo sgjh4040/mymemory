@@ -44,7 +44,7 @@ export class MovieService {
       })
     )
   }
-  //리뷰 가져오기
+  //리뷰 가져오기(list id 값으로 검색)
   getreview(id){
     return this.http.get(`${this.serverurl}/api/record/${id}`);
   }
@@ -73,6 +73,10 @@ export class MovieService {
       })
     );
   };
+  //review detail 불러오기
+  getDetailReview(id){
+    return this.http.get(`${this.serverurl}/api/record/detail/${id}`);
+  }
 
 
 

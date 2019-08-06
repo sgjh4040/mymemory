@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class ListPage implements OnInit {
   list_id: string;
   list: {};
 
-  constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,route: ActivatedRoute) { 
+  constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,route: ActivatedRoute,private router: Router) { 
     route.params.subscribe(val=>{
       console.log('bbbb')
       this.list_id = this.activateRoute.snapshot.paramMap.get('id');
@@ -26,11 +26,11 @@ export class ListPage implements OnInit {
  
 
   ngOnInit() {
-    // this.list_id = this.activateRoute.snapshot.paramMap.get('id');
-    // this.movieService.getreview(this.list_id).subscribe(res=>{
-    //   this.list = res;
-    // });
-
   }
+  godetailreview(id){
+    this.router.navigate(['review/detail',id]);
+  }
+
+  
 
 }
