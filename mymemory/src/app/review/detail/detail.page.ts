@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { AlertController, NavController } from '@ionic/angular';
+import { ActivatedRoute} from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -9,13 +9,12 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
-  tags = ["뮤지컬","윌 스미스","디즈니","알라딘","추억","영화","굿"];
   colors = ["primary","secondary","tertiary","success","warning","danger"];
   review_id:string;
   detail_review= null;
 
 
-  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService ) { }
+  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController ) { }
 
   ngOnInit() {
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
@@ -28,7 +27,16 @@ export class DetailPage implements OnInit {
     const alert = await this.alertController.create({
       header: '리뷰 삭제',
       message: '리뷰를 정말로 삭제할까요?',
-      buttons: ['취소', '삭제']
+      buttons: ['취소', {
+        text:'삭제',
+        handler: () =>{
+          this.movieService.deleteReview(this.review_id).subscribe();
+          setTimeout(()=>{
+            this.nav.back();
+          },500);
+          
+        }
+      }]
     });
 
     await alert.present();

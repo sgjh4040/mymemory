@@ -76,7 +76,12 @@ export class MovieService {
   //review detail 불러오기
   getDetailReview(id){
     return this.http.get(`${this.serverurl}/api/record/detail/${id}`);
-  }
+  };
+
+  //review 삭제
+  deleteReview(id){
+    return this.http.delete(`${this.serverurl}/api/review/${id}`);
+  };
 
 
 
