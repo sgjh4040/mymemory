@@ -17,17 +17,14 @@ export class ListPage implements OnInit {
         this.list = res;
         console.log('리뷰리스트:',this.list)
       })
-    })
-   }
+    });
+   };
 
   ngOnInit() {
     this.movieService.getreviewList().subscribe(res=>{
       this.list = res;
       console.log('리뷰리스트:',this.list)
     })
-  }
-  ngDoCheck() {
-    console.log('ngDoCheck')
   }
 
 }

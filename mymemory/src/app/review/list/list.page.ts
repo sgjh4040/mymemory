@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ListPage implements OnInit {
   list_id: string;
-  list: {};
+  list= null;
 
   constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,route: ActivatedRoute,private router: Router) { 
     route.params.subscribe(val=>{
@@ -18,14 +18,17 @@ export class ListPage implements OnInit {
       this.list_id = this.activateRoute.snapshot.paramMap.get('id');
       this.movieService.getreview(this.list_id).subscribe(res=>{
         this.list = res;
+        console.log('this.list',this.list);
       });
-      console.log(this.list);
-    })
+      
+    });
+    
 
   }
  
 
   ngOnInit() {
+   
   }
   godetailreview(id){
     this.router.navigate(['review/detail',id]);

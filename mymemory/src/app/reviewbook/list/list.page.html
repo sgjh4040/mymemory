@@ -30,7 +30,7 @@
       <div class="card-bottom-wrap">
         <span class="last-date">마지막 리뷰 {{book.last_date|date:'yyyy-MM-dd'}}</span>
         <ion-chip color="danger">
-          <ion-label class="review-cnt">{{book.count}}개</ion-label>
+          <ion-label class="review-cnt">{{book.reviews.length}}개</ion-label>
         </ion-chip>
       </div>
     </ion-card>

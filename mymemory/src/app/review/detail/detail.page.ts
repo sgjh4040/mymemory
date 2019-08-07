@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class DetailPage implements OnInit {
   detail_review= null;
 
 
-  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController ) { }
+  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController,private router: Router ) { }
 
   ngOnInit() {
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
@@ -30,10 +30,14 @@ export class DetailPage implements OnInit {
       buttons: ['취소', {
         text:'삭제',
         handler: () =>{
-          this.movieService.deleteReview(this.review_id).subscribe();
+          this.movieService.deleteReview(this.review_id).subscribe(res=>{
+            console.log('삭제완료')
+          });
           setTimeout(()=>{
-            this.nav.back();
-          },500);
+            // this.nav.back();
+            this.router.navigate(['review/list',this.detail_review.reviewlist_id]);
+            
+          },1000);
           
         }
       }]
