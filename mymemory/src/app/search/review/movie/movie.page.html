@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>리뷰 검색</ion-title>
+        <ion-buttons slot="end">
+          <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
+        </ion-buttons>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+
+
+    <ion-item button *ngFor="let item of (results | async)">
+      {{item.title}}
+      <ion-button (click)="addliker(item._id)">좋아요</ion-button>
+
+    </ion-item>
+</ion-content>

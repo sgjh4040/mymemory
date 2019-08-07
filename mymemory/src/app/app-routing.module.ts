@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'review/write/:id', loadChildren: './review/write/write.module#WritePageModule' },
   { path: 'movie', loadChildren: './search/api/movie/movie.module#MoviePageModule' },
   { path: 'review/detail/:id', loadChildren: './review/detail/detail.module#DetailPageModule' },
+  { path: 'search', loadChildren: './search/review/movie/movie.module#MoviePageModule' },
 ];
 
 @NgModule({
