@@ -10,6 +10,8 @@ import { AlertController } from '@ionic/angular';
 export class ShareService {
   serverurl= environment.url;
 
+  
+
   constructor(private http: HttpClient, private alertController: AlertController) { }
 
   getreview(id){

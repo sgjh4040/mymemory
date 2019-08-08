@@ -12,18 +12,16 @@ export class ListPage implements OnInit {
 
   constructor(private movieService: MovieService, route:ActivatedRoute) {
     route.params.subscribe(val=>{
-      console.log('aaaa');
       this.movieService.getreviewList().subscribe(res=>{
         this.list = res;
-        console.log('리뷰리스트:',this.list)
       })
     });
    };
 
   ngOnInit() {
+    console.log("ngOninit");
     this.movieService.getreviewList().subscribe(res=>{
       this.list = res;
-      console.log('리뷰리스트:',this.list)
     })
   }
 

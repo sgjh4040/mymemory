@@ -28,5 +28,8 @@ export class MoviePage implements OnInit {
     this.selectmovie= movie;
     this.modalController.dismiss(this.selectmovie);
   }
+  back(){
+    this.modalController.dismiss();
+  }
 
 }

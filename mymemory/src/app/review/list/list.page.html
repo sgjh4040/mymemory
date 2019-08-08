@@ -1,74 +1,51 @@
-<ion-header translucent>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>리뷰 리스트</ion-title>
-      <ion-buttons slot="end">
-        <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
-      </ion-buttons>
-    </ion-toolbar>
+<ion-header>
+  <ion-toolbar translucent>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>리뷰 리스트</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
     <ion-searchbar></ion-searchbar>
-  </ion-header>
-  
-  
-  <ion-content fullscreen>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button [routerLink]="['/review/write',list_id]">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  
-    <ion-grid>
-      <ion-row>
-         
-        
-        <ion-col size='6' *ngFor= "let review of list" (click)="godetailreview(review._id)">
-          <ion-card>
-              <img src="../../../assets/icon/movie.png" *ngIf="!review.poster_path"/>
-            <img src="https://image.tmdb.org/t/p/w500{{review.poster_path}}" *ngIf="review.poster_path"/>
-            <ion-card-header>
-              <ion-card-subtitle>{{review.release_date|date:'y-MM'}}</ion-card-subtitle>
-              <ion-card-title>{{review.title}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              {{review.review_score}}
-              <p ><ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"[style.color]="review.review_score >=num ? '#ffbf00':'grey'">
-                </ion-icon></p>
-              <p class="preview">{{review.overview}}</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-  
-        <ion-col>
-          <ion-card>
-            <img src="https://movie-phinf.pstatic.net/20190625_168/1561426986010A3uBi_JPEG/movie_image.jpg" />
-            <ion-card-header>
-              <ion-card-subtitle>The Divine Fury, 2019</ion-card-subtitle>
-              <ion-card-title>사자</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p class="stars">★★★★★</p>
-              <p class="preview"> Founded in 1829 on an isthmus between Lake Monona and Lake Mendota</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-  
-        <ion-col>
-          <ion-card>
-            <img src="https://movie-phinf.pstatic.net/20190524_104/1558663170174Q2mmw_JPEG/movie_image.jpg" />
-            <ion-card-header>
-              <ion-card-subtitle>Aladdin, 2019</ion-card-subtitle>
-              <ion-card-title>알라딘</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <p class="stars">★★★☆☆</p>
-              <p class="preview">Founded in 1829 on an isthmus between Lake Monona and Lake Mendota</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        
-      </ion-row>
-  
-    </ion-grid>
-  </ion-content>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/review/write',list_id]">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid>
+    <ion-row>
+
+
+      <ion-col size='6' *ngFor="let review of list" (click)="godetailreview(review._id)">
+        <ion-card>
+          <img src="../../../assets/icon/movie.png" *ngIf="!review.poster_path" />
+          <img src="https://image.tmdb.org/t/p/w500{{review.poster_path}}" *ngIf="review.poster_path" />
+          <ion-card-header>
+            <ion-card-subtitle>{{review.release_date|date:'y-MM'}}</ion-card-subtitle>
+            <ion-card-title>{{review.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{review.review_score}}
+            <p>
+              <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
+                [style.color]="review.review_score >=num ? '#ffbf00':'grey'">
+              </ion-icon>
+            </p>
+            <p class="preview">{{review.overview}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

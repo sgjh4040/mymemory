@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router} from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -12,9 +12,10 @@ export class DetailPage implements OnInit {
   colors = ["primary","secondary","tertiary","success","warning","danger"];
   review_id:string;
   detail_review= null;
+  private loading;
 
 
-  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController,private router: Router ) { }
+  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController,private router: Router,private loadingController:LoadingController ) { }
 
   ngOnInit() {
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
@@ -30,11 +31,18 @@ export class DetailPage implements OnInit {
       buttons: ['취소', {
         text:'삭제',
         handler: () =>{
+          this.loadingController.create({
+            message: 'Loading'
+          }).then((overlay)=>{
+            this.loading = overlay;
+            this.loading.present();
+          })
           this.movieService.deleteReview(this.review_id).subscribe(res=>{
             console.log('삭제완료')
           });
           setTimeout(()=>{
             // this.nav.back();
+            this.loading.dismiss();
             this.router.navigate(['review/list',this.detail_review.reviewlist_id]);
             
           },1000);
@@ -76,5 +84,7 @@ export class DetailPage implements OnInit {
     });
     await alert.present();
   }
+
+  
 
 }
