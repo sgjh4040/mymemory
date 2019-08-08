@@ -3,16 +3,18 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareService {
   serverurl= environment.url;
+  
 
   
 
-  constructor(private http: HttpClient, private alertController: AlertController) { }
+  constructor(private http: HttpClient, private alertController: AlertController,private socialSharing: SocialSharing) { }
 
   getreview(id){
     return this.http.get(`${this.serverurl}/api/search/review/${id}`);
@@ -33,6 +35,20 @@ export class ShareService {
     });
     alert.then(alert => alert.present());
   }
+  socialShare(message,image){
+    // this.socialSharing.shareWithOptions(this.options).then((res)=>{
+    //   console.log('res',res);
+    // }).catch(e=>{
+    //   console.log('e',e);
+    // })
+    this.socialSharing.share(message,null,[image]).then((res)=>{
+      console.log('res',res);
+    }).catch(e=>{
+      console.log('e',e);
+    })
+  }
+
+  
 
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router} from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
+import { ShareService } from 'src/app/services/share.service';
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +16,7 @@ export class DetailPage implements OnInit {
   private loading;
 
 
-  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController,private router: Router,private loadingController:LoadingController ) { }
+  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute,private movieService: MovieService,private nav: NavController,private router: Router,private loadingController:LoadingController, private shareService: ShareService ) { }
 
   ngOnInit() {
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
@@ -62,7 +63,7 @@ export class DetailPage implements OnInit {
         {
           text:'포함하기',
           handler: () =>{
-            console.log('포함하기')
+            this.shareService.socialShare(`${this.detail_review.title}\r\n\r\n\r\n${this.detail_review.overview}`,`https://image.tmdb.org/t/p/w500${this.detail_review.poster_path}`);
           }
         },
         {
