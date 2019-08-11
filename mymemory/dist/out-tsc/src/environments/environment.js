@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
     production: false,
-    url: 'http://172.30.1.38:5000'
+    url: 'http://172.30.1.13:5000'
 };
 /*
  * For easier debugging in development mode, you can import the following file

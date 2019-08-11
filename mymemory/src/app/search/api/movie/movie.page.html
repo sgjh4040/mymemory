@@ -15,9 +15,9 @@
         <ion-item button *ngFor="let item of (results | async)" (click)="backtoWritepage(item)">
         <!-- <ion-item button *ngFor="let item of (results | async)" (click)="back(item.title,item.release_date,item.overview)"> -->
             
-          <ion-avatar slot="start">
+          <ion-thumbnail  slot="start">
             <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'">
-          </ion-avatar>
+          </ion-thumbnail>
     
           <ion-label text-wrap >
             <h3>{{item.title}}</h3>

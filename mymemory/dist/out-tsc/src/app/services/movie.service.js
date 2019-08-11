@@ -32,7 +32,7 @@ let MovieService = class MovieService {
             throw new Error(e);
         }));
     }
-    //리뷰 가져오기
+    //리뷰 가져오기(list id 값으로 검색)
     getreview(id) {
         return this.http.get(`${this.serverurl}/api/record/${id}`);
     }
@@ -47,6 +47,15 @@ let MovieService = class MovieService {
         }));
     }
     ;
+    //credit 검색
+    searchCredit() {
+        return this.http.get('https://api.themoviedb.org/3/movie/17159/credits?api_key=e02050f991ddedb779571b20eb62034b')
+            .pipe(map(results => {
+            let casts = results['cast'];
+            console.log(casts);
+            return casts;
+        }));
+    }
     //The movie api 검색
     searchData(title, type) {
         return this.http.get(`${this.url}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`)
@@ -54,6 +63,16 @@ let MovieService = class MovieService {
             console.log("영화검색결과", results['results']);
             return results['results'];
         }));
+    }
+    ;
+    //review detail 불러오기
+    getDetailReview(id) {
+        return this.http.get(`${this.serverurl}/api/record/detail/${id}`);
+    }
+    ;
+    //review 삭제
+    deleteReview(id) {
+        return this.http.delete(`${this.serverurl}/api/review/${id}`);
     }
     ;
     //Alert창 생성 메소드

@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Second Blank</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
     <div class="wrap">
       <ion-row>
@@ -30,7 +39,7 @@
       </ion-row>
       <ion-row>
         <ion-col class="ion-padding" size="6">
-          <div>
+          <div [routerLink]="['/home']">
             <img src="assets/img/home/icon_music.png">
             <ion-label>음악</ion-label>
           </div>

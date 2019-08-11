@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>리뷰북 리스트</ion-title>
     <ion-buttons slot="end">
-      <ion-button>편집</ion-button>
+      <ion-button (click)="editButton=!editButton">편집</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -18,21 +18,27 @@
     </ion-fab-button>
   </ion-fab>
 
+  
+    <ion-card  *ngFor="let book of list" [routerLink]="['/review/list',book._id]">
+      <div class="card-top-wrap">
+        <ion-item>
+          <ion-avatar>
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <ion-card-title>{{book.title}}</ion-card-title>
+          <ion-icon *ngIf="editButton" color="danger" name="trash" slot="end"></ion-icon>
+        </ion-item>
+        
+      </div>
+      <div class="card-bottom-wrap">
+        <span class="last-date">마지막 리뷰 {{book.last_date|date:'yyyy-MM-dd'}}</span>
+        <ion-chip color="danger">
+          <ion-label class="review-cnt">{{book.reviews.length}}개</ion-label>
+        </ion-chip>
+      </div>
 
-  <ion-card *ngFor="let book of list" [routerLink]="['/review/list',book._id]">
-    <div class="card-top-wrap">
-      <ion-item>
-        <ion-avatar>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-card-title>{{book.title}}</ion-card-title>
-      </ion-item>
-    </div>
-    <div class="card-bottom-wrap">
-      <span class="last-date">마지막 리뷰 {{book.last_date|date:'yyyy-MM-dd'}}</span>
-      <ion-chip color="danger">
-        <ion-label class="review-cnt">{{book.reviews.length}}개</ion-label>
-      </ion-chip>
-    </div>
-  </ion-card>
+    </ion-card>
+   
+    
+  
 </ion-content>

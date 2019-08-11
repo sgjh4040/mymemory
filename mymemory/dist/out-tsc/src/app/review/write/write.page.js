@@ -32,10 +32,14 @@ let WritePage = class WritePage {
     }
     ;
     onSubmit() {
+        let that = this;
         this.reviewForm.value.reviewlist_id = this.list_id;
         console.log('저장내용', this.reviewForm.value);
         this.movieService.writeReview(this.reviewForm.value).subscribe();
-        this.router.navigateByUrl(`/review/list/${this.list_id}`);
+        //서버 저장 시간 텀을 두기위해.
+        setTimeout(function () {
+            that.router.navigateByUrl(`/review/list/${that.list_id}`);
+        }, 500);
     }
     ;
     openSearchMovieModal() {

@@ -5,22 +5,19 @@ import { ActivatedRoute } from '@angular/router';
 let ListPage = class ListPage {
     constructor(movieService, route) {
         this.movieService = movieService;
+        this.editButton = false;
         route.params.subscribe(val => {
-            console.log('aaaa');
             this.movieService.getreviewList().subscribe(res => {
                 this.list = res;
-                console.log('리뷰리스트:', this.list);
             });
         });
     }
+    ;
     ngOnInit() {
+        console.log("ngOninit");
         this.movieService.getreviewList().subscribe(res => {
             this.list = res;
-            console.log('리뷰리스트:', this.list);
         });
-    }
-    ngDoCheck() {
-        console.log('ngDoCheck');
     }
 };
 ListPage = tslib_1.__decorate([

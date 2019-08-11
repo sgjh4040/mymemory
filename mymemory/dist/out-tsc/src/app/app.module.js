@@ -11,12 +11,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MoviePageModule } from './search/api/movie/movie.module';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { File } from '@ionic-native/file/ngx';
 export function jwtOptionsFactory(storage) {
     return {
         tokenGetter: () => {
             return storage.get('access_token');
         },
-        whitelistedDomains: ['172.30.1.38:5000']
+        whitelistedDomains: ['172.30.1.13:5000']
     };
 }
 let AppModule = class AppModule {
@@ -39,7 +41,9 @@ AppModule = tslib_1.__decorate([
         providers: [
             StatusBar,
             SplashScreen,
-            { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+            { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+            SocialSharing,
+            File
         ],
         bootstrap: [AppComponent]
     })

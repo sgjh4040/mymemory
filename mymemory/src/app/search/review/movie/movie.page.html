@@ -14,9 +14,9 @@
     <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
 
 
-    <ion-item button *ngFor="let item of (results | async)">
-      {{item.title}}
-      <ion-button (click)="addliker(item._id)">좋아요</ion-button>
+    <ion-item button *ngFor="let item of (results | async)"  >
+      <div [routerLink]="['/review/detail',item._id]">{{item.title}}</div>
+      <ion-icon name="heart" slot="end" color="danger" (click)="addliker(item._id)">좋아요</ion-icon>
 
     </ion-item>
 </ion-content>

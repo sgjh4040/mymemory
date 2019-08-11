@@ -20,6 +20,9 @@ let MoviePage = class MoviePage {
         this.selectmovie = movie;
         this.modalController.dismiss(this.selectmovie);
     }
+    back() {
+        this.modalController.dismiss();
+    }
 };
 MoviePage = tslib_1.__decorate([
     Component({

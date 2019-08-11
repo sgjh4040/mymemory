@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListPage implements OnInit {
   list: {};
+  editButton=false;
 
   constructor(private movieService: MovieService, route:ActivatedRoute) {
     route.params.subscribe(val=>{

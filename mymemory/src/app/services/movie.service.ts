@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AlertController } from '@ionic/angular';
-import { catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap, map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
 export class MovieService {
 
   serverurl= environment.url;
-  url = "https://api.themoviedb.org/3/search";
+  movieurl = "https://api.themoviedb.org/3/search";
+  detailurl ="https://api.themoviedb.org/3"
+
   apiKey = "e02050f991ddedb779571b20eb62034b";
 
   constructor(private http: HttpClient,private alertController: AlertController) { }
@@ -62,10 +64,30 @@ export class MovieService {
       })
     )
   };
+  //director 검색
+  searchDirector(): Observable<any>{
+    return this.http.get('https://api.themoviedb.org/3/movie/17159/credits?api_key=e02050f991ddedb779571b20eb62034b')
+    .pipe(
+      map(results=>{
+        let a = results['crew'];
+
+        results['test']= a.filter(res1=>{
+          return (res1.job=='Director')
+        }).filter(res2=>{
+          console.log('res2',res2.department);
+          return (res2.department=='Directing')
+        })
+        return results['test'];
+      })
+      
+      
+    )
+  }
+
 
   //The movie api 검색
   searchData(title: string, type: string): Observable<any>{
-    return this.http.get(`${this.url}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`)
+    return this.http.get(`${this.movieurl}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`)
     .pipe(
       map(results => {
         console.log("영화검색결과",results['results']);
@@ -73,6 +95,26 @@ export class MovieService {
       })
     );
   };
+  //영화 detail 검색
+  detailMovie(title: string, type: string): Observable<any>{
+    return this.http.get(`${this.detailurl}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`);
+  };
+  //영화 상형작 검색
+  playingMovie():Observable<any>{
+    return this.http.get('https://api.themoviedb.org/3/movie/now_playing?api_key=e02050f991ddedb779571b20eb62034b&language=ko-kr&page=1&region=KR')
+    .pipe(
+      map(results => {
+        return results['results']
+      })
+    )
+  }
+  //cgv 영화 검색
+  cgvMovies():Observable<any>{
+    return this.http.get(`${this.serverurl}/api/cgvinfo`);
+  }
+  
+  
+
   //review detail 불러오기
   getDetailReview(id){
     return this.http.get(`${this.serverurl}/api/record/detail/${id}`);

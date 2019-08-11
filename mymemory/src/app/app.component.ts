@@ -19,7 +19,7 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    this.initializeApp();
+    // this.initializeApp();
   }
 
   initializeApp() {
