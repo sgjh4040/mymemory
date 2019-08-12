@@ -1,30 +1,30 @@
 <ion-content>
 
   <ion-slides [options]="sliderConfig">
-      <ion-slide *ngFor="let item of (playingMovies | async)">
-        <ion-card>
-            <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'">
-            <ion-card-content>
-                <div>{{item.title}}</div>
-              </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
+    <ion-slide *ngFor="let item of (playingMovies | async)">
+      <ion-card>
+        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'">
+        <ion-card-content>
+          <div>{{item.title}}</div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
 
-    <div>현재 상영작(CGV)</div>
+  <div>현재 상영작(CGV)</div>
   <ion-slides [options]="sliderConfig">
-      
-      <ion-slide *ngFor="let item of (cgvMovies | async)">
-        <ion-card>
-            <img src="{{item.image}}" *ngIf="item.poster_path != 'N/A'">
-            <ion-card-content>
-                <div>{{item.title}}</div>
-                <div>순위: {{item.rank}}</div>
-                <div>예매율: {{item.percent}}</div>
-              </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
+
+    <ion-slide *ngFor="let item of (cgvMovies | async)">
+      <ion-card [routerLink]="['/detailmovie',item.detailId]">
+        <img src="{{item.image}}" *ngIf="item.poster_path != 'N/A'">
+        <ion-card-content>
+          <div>{{item.title}}</div>
+          <div>순위: {{item.rank}}</div>
+          <div>예매율: {{item.percent}}</div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>

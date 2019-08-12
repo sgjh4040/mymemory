@@ -112,6 +112,10 @@ export class MovieService {
   cgvMovies():Observable<any>{
     return this.http.get(`${this.serverurl}/api/cgvinfo`);
   }
+  //cgv 영화 detail 검색
+  detailCgv(id): Observable<any>{
+    return this.http.get(`${this.serverurl}/api/cgvdetail/${id}`);
+  }
   
   
 

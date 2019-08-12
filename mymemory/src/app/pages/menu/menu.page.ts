@@ -13,7 +13,7 @@ export class MenuPage implements OnInit {
     url: '/menu/main'
   },
   {
-    title: 'Second page with Tabs',
+    title: 'Search',
     url: '/menu/moviemain'
   }
 ];

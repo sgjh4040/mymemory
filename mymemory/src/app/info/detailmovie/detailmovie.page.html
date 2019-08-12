@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>영화 상세</ion-title>
+  
+      
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content *ngIf='result'>
+  <div>{{result.rate}}</div>
+  <div>{{result.view}}</div>
+  <div>{{result.overview}}</div>
+
+  
+  <div>스틸컷</div>
+    <ion-slides pager='true' [options]="slideOpts">
+        <ion-slide *ngFor="let item of result.stillcuts">
+          <ion-card>
+            <img src="{{item}}" *ngIf="item != 'N/A'">
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+
+
+</ion-content>
