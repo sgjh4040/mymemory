@@ -6,7 +6,7 @@
     <ion-title>나의 리뷰</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button *ngIf='detail_review?.writer==user_id'>
         편집
       </ion-button>
     </ion-buttons>
@@ -14,6 +14,10 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab class="like_button" vertical="top" horizontal="end" slot="fixed" (click)="addliker(detail_review._id)"*ngIf='detail_review?.writer!=user_id'>
+    <ion-icon name="heart" *ngIf="like_status" size="large" color="danger"></ion-icon>
+    <ion-icon name="heart-empty" *ngIf="!like_status"size="large"></ion-icon>
+  </ion-fab>
 
   <ion-grid *ngIf="detail_review">
     <ion-row>

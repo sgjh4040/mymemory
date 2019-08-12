@@ -20,8 +20,5 @@ export class MoviePage implements OnInit {
   searchChanged(){
     this.results =this.shareService.getreview(this.searchTerm);
   };
-  addliker(id){
-    this.shareService.addliker(id).subscribe();
-  }
 
 }

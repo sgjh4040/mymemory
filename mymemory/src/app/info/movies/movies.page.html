@@ -2,8 +2,8 @@
 
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let item of (playingMovies | async)">
-      <ion-card>
-        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'">
+      <ion-card >
+        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'"style="height: 200px;">
         <ion-card-content>
           <div>{{item.title}}</div>
         </ion-card-content>

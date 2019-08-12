@@ -9,18 +9,30 @@
 
     <ion-content>
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
-          <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath.startsWith(p.url)">
+        <ion-menu-toggle auto-hide="false" >
+    
+          <ion-item routerLink="/menu/main" routerDirection="root" >
             <ion-label>
-              {{p.title}}
+              myMemory
             </ion-label>
+          </ion-item>
+          <ion-item routerLink="/menu/moviemain" routerDirection="root" >
+            <ion-label>
+              Search Movie
+            </ion-label>
+          </ion-item>
+          <ion-item tappable (click)="login()" *ngIf="!auth_state">
+            <ion-icon name="log-In" slot="start"></ion-icon>
+            LogIn
+          </ion-item>
+          <ion-item tappable (click)="logout()" *ngIf="auth_state">
+            <ion-icon name="log-out" slot="start"></ion-icon>
+            Logout
           </ion-item>
 
         </ion-menu-toggle>
-        <ion-item tappable routerLink="/login" routerDirection="root">
-          <ion-icon name="log-out" slot="start"></ion-icon>
-          Logout
-        </ion-item>
+        <!-- <ion-item tappable routerLink="/login" routerDirection="root"> -->
+        
 
       </ion-list>
     </ion-content>

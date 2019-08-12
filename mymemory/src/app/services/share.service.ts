@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
@@ -21,6 +21,10 @@ export class ShareService {
   }
   addliker(id){
     return this.http.get(`${this.serverurl}/api/search/reviewup/${id}`).pipe(
+
+      tap(res=>{
+        this.showAlert('좋아요 감사합니다!');
+      }),
       catchError(e=>{
         this.showAlert(e.error.msg)
         throw new Error(e);
@@ -30,7 +34,7 @@ export class ShareService {
   showAlert(msg) {
     let alert = this.alertController.create({
       message: msg,
-      header: 'Error',
+      header: '좋아요',
       buttons: ['확인']
     });
     alert.then(alert => alert.present());

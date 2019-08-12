@@ -48,12 +48,12 @@ export class MovieService {
   }
   //리뷰 가져오기(list id 값으로 검색)
   getreview(id){
-    return this.http.get(`${this.serverurl}/api/record/${id}`);
+    return this.http.get(`${this.serverurl}/api/review/${id}`);
   }
 
   //리뷰 등록하기
   writeReview(data){
-    return this.http.post(`${this.serverurl}/api/writetest`,data)
+    return this.http.post(`${this.serverurl}/api/review`,data)
     .pipe(
       tap(res => {
         this.showAlert('정상적으로 저장되었습니다.','성공');
@@ -121,13 +121,18 @@ export class MovieService {
 
   //review detail 불러오기
   getDetailReview(id){
-    return this.http.get(`${this.serverurl}/api/record/detail/${id}`);
+    return this.http.get(`${this.serverurl}/api/review/detail/${id}`);
   };
 
   //review 삭제
   deleteReview(id){
     return this.http.delete(`${this.serverurl}/api/review/${id}`);
   };
+
+  //like 상태 확인
+  checkLike(id){
+    return this.http.get(`${this.serverurl}/api/reviewup/state/${id}`)
+  }
 
 
 
