@@ -51,6 +51,11 @@ export class MovieService {
       })
     )
   }
+  //리뷰 북 삭제
+  deleteBook(id){
+    return this.http.delete(`${this.serverurl}/api/list/${id}`);
+  };
+
   //리뷰 가져오기(list id 값으로 검색)
   getreview(id){
     return this.http.get(`${this.serverurl}/api/review/${id}`);

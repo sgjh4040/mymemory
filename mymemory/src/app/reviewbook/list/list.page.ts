@@ -25,5 +25,13 @@ export class ListPage implements OnInit {
       this.list = res;
     })
   }
+  deleteBook(id){
+    this.movieService.deleteBook(id).subscribe(res=>{
+      this.movieService.getreviewList().subscribe(res=>{
+        this.list = res;
+      })
+    });
+
+  }
 
 }
