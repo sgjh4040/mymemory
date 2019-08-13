@@ -65,19 +65,19 @@ export class MovieService {
     )
   };
   //director 검색
-  searchDirector(): Observable<any>{
-    return this.http.get('https://api.themoviedb.org/3/movie/17159/credits?api_key=e02050f991ddedb779571b20eb62034b')
+  searchDirector(id): Observable<any>{
+    return this.http.get(`${this.detailurl}/movie/${id}/credits?api_key=${this.apiKey}`)
     .pipe(
       map(results=>{
         let a = results['crew'];
 
-        results['test']= a.filter(res1=>{
+        results['director']= a.filter(res1=>{
           return (res1.job=='Director')
         }).filter(res2=>{
           console.log('res2',res2.department);
           return (res2.department=='Directing')
         })
-        return results['test'];
+        return results['director'];
       })
       
       

@@ -14,7 +14,8 @@ import { MoviePage } from 'src/app/search/api/movie/movie.page';
 export class WritePage implements OnInit {
   list_id: string;
   reviewForm: FormGroup;
-  movie: null;
+  movie={};
+  nowdate:String =new Date().toISOString();
 
 
   constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,private modalController: ModalController, private router: Router,private nav: NavController) { }
@@ -23,10 +24,11 @@ export class WritePage implements OnInit {
     this.list_id=this.activateRoute.snapshot.paramMap.get('id');
 
     this.reviewForm = new FormGroup({
-      title: new FormControl('',[Validators.required]),
       writer: new FormControl(''),
       reviewlist_id: new FormControl(''),
+      title: new FormControl('',[Validators.required]),
       release_date: new FormControl(''),
+      director: new FormControl(''),
       overview: new FormControl(''),
       genre: new FormControl(''),
       watch_date: new FormControl(''),
@@ -61,10 +63,13 @@ export class WritePage implements OnInit {
     modal.onDidDismiss()
     .then((data) => {
       
-      console.log(data['data']);
-      console.log(typeof data['data']);
-
       this.movie = data['data'];
+     
+      this.movieService.searchDirector(this.movie['id']).subscribe(res=>{
+        this.movie['director'] = res[0];
+      });
+      console.log(this.movie);
+      
     })
     return await modal.present(); 
   };

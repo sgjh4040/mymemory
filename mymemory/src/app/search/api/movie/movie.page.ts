@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieService } from 'src/app/services/movie.service';
 import { ModalController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie',
@@ -22,7 +23,7 @@ export class MoviePage implements OnInit {
   }
 
   searchChanged(){
-    this.results =this.movieService.searchData(this.searchTerm,this.type);
+    this.results =this.movieService.searchData(this.searchTerm,this.type)
   };
   backtoWritepage(movie){
     this.selectmovie= movie;

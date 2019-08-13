@@ -23,7 +23,7 @@ export class ShareService {
     return this.http.get(`${this.serverurl}/api/search/reviewup/${id}`).pipe(
 
       tap(res=>{
-        this.showAlert('좋아요 감사합니다!');
+        this.showAlert(res['msg']);
       }),
       catchError(e=>{
         this.showAlert(e.error.msg)

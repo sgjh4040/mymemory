@@ -28,16 +28,17 @@ export class DetailPage implements OnInit {
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
     if (this.authService.user) {
       this.user_id = this.authService.user.id;
+      this.movieService.checkLike(this.review_id).subscribe(state=>{
+        this.like_status = state;
+        console.log(this.like_status);
+      })
     }
     console.log('접속자 ID:', this.user_id);
     this.movieService.getDetailReview(this.review_id).subscribe(result => {
       this.detail_review = result;
       console.log('detail정보', this.detail_review);
     });
-    this.movieService.checkLike(this.review_id).subscribe(state=>{
-      this.like_status = state;
-      console.log(this.like_status);
-    })
+    
   }
   ngDoCheck() {
   }
@@ -45,8 +46,12 @@ export class DetailPage implements OnInit {
   
   //좋아요up 메소드 
   addliker(id){
-    this.shareService.addliker(id).subscribe();
-    this.like_status= !this.like_status;
+    if(this.authService.user){
+      this.shareService.addliker(id).subscribe();
+      this.like_status= !this.like_status;
+      return;
+    }
+    this.router.navigateByUrl('/login');
   }
 
 
