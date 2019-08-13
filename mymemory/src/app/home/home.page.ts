@@ -29,15 +29,5 @@ export class HomePage implements OnInit {
 
   constructor(private movieService: MovieService) {}
 
-  search(){
-    console.log('메소드 실행')
-    this.movieService.searchDirector().subscribe(res=>{
-      console.log(res);
-    })
-  }
-
-  test(){
-    
-  }
 
 }

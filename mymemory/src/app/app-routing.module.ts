@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
   { path: 'actors', loadChildren: './info/actors/actors.module#ActorsPageModule' },
   { path: 'detailmovie/:id', loadChildren: './info/detailmovie/detailmovie.module#DetailmoviePageModule' },
+  { path: 'mypage', loadChildren: './member/mypage/mypage.module#MypagePageModule' },
 ];
 
 @NgModule({

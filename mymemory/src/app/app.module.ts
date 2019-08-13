@@ -14,7 +14,12 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MoviePageModule } from './search/api/movie/movie.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+
+
 
 export function jwtOptionsFactory(storage) {
   return {
@@ -45,7 +50,10 @@ export function jwtOptionsFactory(storage) {
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
-    File
+    File,
+    Camera,
+    FilePath,
+    WebView
   ],
   bootstrap: [AppComponent]
 })

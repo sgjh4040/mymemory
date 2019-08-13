@@ -75,7 +75,7 @@ export class MovieService {
     )
   };
   //director 검색
-  searchDirector(id): Observable<any>{
+  searchDirector(id:any): Observable<any>{
     return this.http.get(`${this.detailurl}/movie/${id}/credits?api_key=${this.apiKey}`)
     .pipe(
       map(results=>{
