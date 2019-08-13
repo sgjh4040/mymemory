@@ -47,7 +47,7 @@
 
         <ion-item>
           <ion-label>장르</ion-label>
-          <ion-note slot="end" color="success">{{detail_review.genre}}</ion-note>
+          <ion-note slot="end" color="success">{{movieService.getGenre(detail_review.genre)}}</ion-note>
         </ion-item>
         <ion-item>
           <ion-label>관람일</ion-label>

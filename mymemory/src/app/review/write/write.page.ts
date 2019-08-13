@@ -62,13 +62,17 @@ export class WritePage implements OnInit {
     });
     modal.onDidDismiss()
     .then((data) => {
-      
-      this.movie = data['data'];
+
+      if(data['data']!=undefined){
+        this.movie = data['data'];
+        this.movie['genre']=this.movie['genre_ids'][0];
      
       this.movieService.searchDirector(this.movie['id']).subscribe(res=>{
         this.movie['director'] = res[0];
       });
-      console.log(this.movie);
+      }
+      
+      
       
     })
     return await modal.present(); 
