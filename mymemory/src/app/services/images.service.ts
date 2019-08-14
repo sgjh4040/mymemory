@@ -45,9 +45,9 @@ export class ImagesService {
     if (img === null) {
       return '';
     } else {
-      // let converted = this.webview.convertFileSrc(img);
+      let converted = this.webview.convertFileSrc(img);
 
-      return img;
+      return converted;
     }
   }
   async selectImage() {

@@ -12,6 +12,7 @@ export class MypagePage implements OnInit {
   constructor(private imageService: ImagesService,private authService: AuthService) { }
 
   ngOnInit() {
+    this.imageService.images=[];
     this.imageService.STORAGE_KEY= this.authService.user.id;
     this.imageService.loadStoragedImage();
   }

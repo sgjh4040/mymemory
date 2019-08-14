@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { ModalController, NavController } from '@ionic/angular';
 import { MoviePage } from 'src/app/search/api/movie/movie.page';
+import { ImagesService } from 'src/app/services/images.service';
 
 
 @Component({
@@ -18,11 +19,12 @@ export class WritePage implements OnInit {
   nowdate:String =new Date().toISOString();
 
 
-  constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,private modalController: ModalController, private router: Router,private nav: NavController) { }
+  constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,private modalController: ModalController, private router: Router,private nav: NavController,private imageService:ImagesService) { }
 
   ngOnInit() {
     this.list_id=this.activateRoute.snapshot.paramMap.get('id');
-
+    this.imageService.images=[];
+    this.imageService.STORAGE_KEY= this.createImagesfolder();
     this.reviewForm = new FormGroup({
       writer: new FormControl(''),
       reviewlist_id: new FormControl(''),
@@ -43,6 +45,7 @@ export class WritePage implements OnInit {
   onSubmit(){
     let that=this;
     this.reviewForm.value.reviewlist_id= this.list_id;
+    this.reviewForm.value.images_id=this.imageService.STORAGE_KEY;
     console.log('저장내용',this.reviewForm.value);
     this.movieService.writeReview(this.reviewForm.value).subscribe();
 
@@ -77,5 +80,11 @@ export class WritePage implements OnInit {
     })
     return await modal.present(); 
   };
+  createImagesfolder() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + "";
+    return newFileName;
+  }
 
 }

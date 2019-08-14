@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { ShareService } from 'src/app/services/share.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-detail',
@@ -19,12 +20,13 @@ export class DetailPage implements OnInit {
   private loading;
 
 
-  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute, private movieService: MovieService, private nav: NavController, private router: Router, private loadingController: LoadingController, private shareService: ShareService, private authService: AuthService) {
+  constructor(private alertController: AlertController, private activateRoute: ActivatedRoute, private movieService: MovieService, private nav: NavController, private router: Router, private loadingController: LoadingController, private shareService: ShareService, private authService: AuthService, private imageService: ImagesService) {
 
 
    }
   ngOnInit() {
     this.user_id = '';
+    this.imageService.images=[];
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
     if (this.authService.user) {
       this.user_id = this.authService.user.id;
@@ -36,7 +38,10 @@ export class DetailPage implements OnInit {
     console.log('접속자 ID:', this.user_id);
     this.movieService.getDetailReview(this.review_id).subscribe(result => {
       this.detail_review = result;
-      console.log('detail정보', this.detail_review);
+      this.imageService.STORAGE_KEY = this.detail_review.images_id;
+      this.imageService.loadStoragedImage();
+
+      // console.log('detail정보', this.detail_review);
     });
     
   }
