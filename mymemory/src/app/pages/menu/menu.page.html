@@ -21,6 +21,11 @@
               Search Movie
             </ion-label>
           </ion-item>
+          <ion-item routerLink="/mypage" *ngIf="auth_state">
+            <ion-label>
+                Mypage
+              </ion-label>
+          </ion-item>
           <ion-item tappable (click)="login()" *ngIf="!auth_state">
             <ion-icon name="log-In" slot="start"></ion-icon>
             LogIn
