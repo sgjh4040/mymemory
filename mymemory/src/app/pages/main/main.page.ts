@@ -18,19 +18,21 @@ export class MainPage implements OnInit {
   }
 
   goReviewbook(){
-    this.loadingController.create({
-      message: 'Loading',
-      spinner: 'crescent',
-      cssClass:'custom-loader-class'
-    }).then((overlay)=>{
-      this.loading = overlay;
-      this.loading.present();
-    })
-
-    setTimeout(()=>{
-      this.loading.dismiss();
-      this.router.navigateByUrl('/reviewbook/list');
-    },500);
+    // this.loadingController.create({
+    //   message: 'Loading',
+    //   spinner: 'crescent',
+    //   cssClass:'custom-loader-class'
+    // }).then((overlay)=>{
+    //   this.loading = overlay;
+    //   this.loading.present();
+    // })
+    
+    // setTimeout(()=>{
+    //   this.router.navigateByUrl('/reviewbook/list');
+    //   this.loading.dismiss();
+      
+    // },500);
+    this.router.navigateByUrl('/reviewbook/list');
   }
 
   logout() {

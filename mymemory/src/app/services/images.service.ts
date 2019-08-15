@@ -45,9 +45,9 @@ export class ImagesService {
     if (img === null) {
       return '';
     } else {
-      let converted = this.webview.convertFileSrc(img);
+      // let converted = this.webview.convertFileSrc(img);
 
-      return converted;
+      return img;
     }
   }
   async selectImage() {
@@ -113,6 +113,7 @@ export class ImagesService {
 
     this.storage.get(this.STORAGE_KEY).then(images => {
       let arr = JSON.parse(images);
+      console.log('arr',arr);
       if (!arr) {
         let newImages = [name];
         this.storage.set(this.STORAGE_KEY, JSON.stringify(newImages));

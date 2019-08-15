@@ -18,6 +18,7 @@ import { File } from '@ionic-native/File/ngx';
 import { Camera } from '@ionic-native/Camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { LoadingService } from './services/loading.service';
 
 
 
@@ -53,7 +54,8 @@ export function jwtOptionsFactory(storage) {
     File,
     Camera,
     FilePath,
-    WebView
+    WebView,
+    LoadingService
   ],
   bootstrap: [AppComponent]
 })
