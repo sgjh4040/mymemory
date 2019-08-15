@@ -1,99 +1,102 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="/"></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>mypage</ion-title>
-    
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div>{{imageService.STORAGE_KEY}}</div>
-    <h3 *ngIf="imageService.images.length == 0" text-center>Please Select Image!</h3>
+  <div>{{imageService.STORAGE_KEY}}</div>
+  <h3 *ngIf="imageService.images.length == 0" text-center>프로필 설정해주세요!</h3>
 
-      <div *ngFor="let img of imageService.images; index as pos">
-        <div>img.path:{{img.path}}</div>
-        <div>img.filepath:{{img.filePath}}</div>
-        
-        <img [src]="img.path">
-      </div>
+  <div *ngFor="let img of imageService.images; index as pos">
+    <div>img.path:{{img.path}}</div>
+    <div>img.filepath:{{img.filePath}}</div>
 
-      
+    <img [src]="img.path">
+  </div>
+
+
   <ion-avatar style="margin: 10pt auto;">
-      <img [src]="imageService.images[0]?.path">
-    </ion-avatar>
-  <img src='http://localhost:8100/_app_file_/var/mobile/Containers/Data/Application/98DE5D18-233D-49E7-8014-82D62821CF06/Library/NoCloud/1565720859246.jpg'>
-  
-    <ion-item>
-      <ion-label position="fixed">닉네임</ion-label>
-      <ion-input type="text" name="nickname" [(ngModel)]="nickname"></ion-input>
-      <ion-icon  name="checkmark" [style.color]="exist ? 'red': 'black'" ></ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label position="fixed" >아이디</ion-label>
-      <ion-input type="text" value="sgjh4040" readonly></ion-input>
-      
-    </ion-item>
-    <ion-item button>
-        <ion-icon name="person"></ion-icon>
-        <ion-label>
-          <h3>프로필 수정</h3>
-        </ion-label>
-        <ion-icon slot="end"></ion-icon>
-      </ion-item>
-  
-    <ion-item button>
-      <ion-icon name="key" ></ion-icon>
-      <ion-label>
-        <h3>어플 비밀번호</h3>
-      </ion-label>
-      <ion-icon slot="end"></ion-icon>
-    </ion-item>
-  
-    <ion-item button>
-        <ion-icon name="sad" ></ion-icon>
-        <ion-label>
-          <h3>탈 퇴</h3>
-        </ion-label>
-        <ion-icon slot="end" name="ios-arrow"> </ion-icon>
-      </ion-item>
-   
+    <img src="../../../assets/icon/account.png"*ngIf="imageService.images.length == 0">
+    <img [src]="imageService.images[0]?.path" *ngIf="imageService.images.length != 0">
+  </ion-avatar>
 
-    
- 
-    <ion-list>
-      <ion-item *ngFor="let img of imageService.images; index as pos" text-wrap>
-          <div>{{img.path}}</div>
-        <ion-thumbnail slot="start">
-          <ion-img [src]="img.path"></ion-img>
-        </ion-thumbnail>
-        <ion-label>
-          {{ img.name }}
-        </ion-label>
-        <ion-button slot="end" fill="clear" (click)="imageService.startUpload(img)">
-          <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
-        </ion-button>
-        <ion-button slot="end" fill="clear" (click)="imageService.deleteImage(img, pos)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-list>
-  
+  <ion-item>
+    <ion-label position="fixed">닉네임</ion-label>
+    <ion-input type="text" name="nickname" [(ngModel)]="nickname"></ion-input>
+    <ion-icon name="checkmark" [style.color]="exist ? 'red': 'black'"></ion-icon>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">아이디</ion-label>
+    <ion-input type="text" value="sgjh4040" readonly></ion-input>
+
+  </ion-item>
+  <ion-item button>
+    <ion-icon name="person"></ion-icon>
+    <ion-label>
+      <h3>프로필 수정</h3>
+    </ion-label>
+    <ion-icon slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-item button>
+    <ion-icon name="key"></ion-icon>
+    <ion-label>
+      <h3>어플 비밀번호</h3>
+    </ion-label>
+    <ion-icon slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-item button>
+    <ion-icon name="sad"></ion-icon>
+    <ion-label>
+      <h3>탈 퇴</h3>
+    </ion-label>
+    <ion-icon slot="end" name="ios-arrow"> </ion-icon>
+  </ion-item>
+
+
+
+<!-- 
+  <ion-list>
+    <ion-item *ngFor="let img of imageService.images; index as pos" text-wrap>
+      <div>{{img.path}}</div>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="img.path"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ img.name }}
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="imageService.startUpload(img)">
+        <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" fill="clear" (click)="imageService.deleteImage(img, pos)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list> -->
+
 
 </ion-content>
-<ion-footer>
-    <ion-toolbar color="primary">
-      <ion-button fill="clear" expand="full" color="light" (click)="imageService.selectImage()">
-        <ion-icon slot="start" name="camera"></ion-icon>
-        Select Image</ion-button>
+<!-- <ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button fill="clear" expand="full" color="light" (click)="imageService.selectImage()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Select Image
+    </ion-button>
 
-        <ion-button fill="clear" expand="full" color="light" (click)="imageService.startuploads(123)">
-            <ion-icon slot="start" name="camera"></ion-icon>
-            Select Image</ion-button>
-            <ion-button fill="clear" expand="full" color="danger" (click)="imageService.startUploads()">
-                <ion-icon slot="start" name="camera"></ion-icon>
-                test</ion-button>
-            
-    </ion-toolbar>
-  </ion-footer>
+    <ion-button fill="clear" expand="full" color="light" (click)="imageService.startuploads(123)">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Select Image
+    </ion-button>
+    <ion-button fill="clear" expand="full" color="danger" (click)="imageService.startUploads()">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      test
+    </ion-button>
+
+  </ion-toolbar>
+</ion-footer> -->

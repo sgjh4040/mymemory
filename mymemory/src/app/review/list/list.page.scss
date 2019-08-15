@@ -33,6 +33,9 @@ ion-card-title {
 ion-card-subtitle {
     font-size: 8px;
 }
+ion-card-subtitle > span {
+    color: red;
+}
 
 ion-card-content {
     padding: 5px 16px 20px;

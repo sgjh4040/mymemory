@@ -29,7 +29,11 @@ export class LoginPage implements OnInit {
   register() {
     this.authService.register(this.loginForm.value).subscribe(res => {
       // Call Login to automatically login the new user
-      this.authService.login(this.loginForm.value).subscribe();
+      this.authService.login(this.loginForm.value).subscribe(state=>{
+        if(state!=null){
+          this.router.navigate(['/menu/main']);
+        }
+      });
     });
   }
 
