@@ -16,6 +16,7 @@
 
     <ion-item button *ngFor="let item of (results | async)"  >
       <div [routerLink]="['/review/detail',item._id]">{{item.title}}</div>
+      <div>{{item.liker.length}}</div>
       
 
     </ion-item>

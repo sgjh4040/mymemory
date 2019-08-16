@@ -24,12 +24,13 @@ export class CreatePage implements OnInit {
     this.bookIcon='icon_books.png';
     this.reviewlistForm = new FormGroup({
       title: new FormControl('',[Validators.required]),
-      profile: new FormControl('')
+      profile: new FormControl(this.bookIcon)
     })
   }
 
   onSubmit(){
-   
+    console.log(this.bookIcon);
+    console.log(this.reviewlistForm.value)
     this.movieService.writeReviewList(this.reviewlistForm.value).subscribe();
     // this.router.navigateByUrl('reviewbook/list')
     this.router.navigate(['reviewbook/list'])
