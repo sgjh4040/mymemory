@@ -1,28 +1,71 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>영화 상세</ion-title>
-  
-      
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>영화 상세</ion-title>
 
-<ion-content *ngIf='result'>
-  <div>{{result.rate}}</div>
-  <div></div>
-  <div>{{result.overview}}</div>
 
-  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf='result'>
+  <ion-grid>
+    <ion-row>
+      <ion-col size='4'>
+        <div class="image-wrap">
+          <img [src]="result.thumbImage" *ngIf="result.thumbImage;else defaultImage">
+        </div>
+        <ng-template #defaultImage>
+          <div class="default-image">
+            <p>No</p>
+            <p>Image</p>
+          </div>
+        </ng-template>
+      </ion-col>
+      <ion-col size='8'>
+        <p id='title1'>
+          {{result.title1}}
+        </p>
+        <p id='title2'>
+          ({{result.title2}})
+        </p>
+        <p id='rate'>
+          {{result.rate}}
+        </p>
+        <p id='view'>
+          {{result.view}}
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        {{result.spec1}}
+      </ion-item>
+      <ion-item>
+        {{result.spec2}}
+      </ion-item>
+    </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label position='stacked' class="overview">줄거리</ion-label>
+        <ion-textarea>
+          {{result.overview}}
+        </ion-textarea>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+
+
+
   <div>스틸컷</div>
-    <ion-slides pager='true' [options]="slideOpts">
-        <ion-slide *ngFor="let item of result.stillcuts">
-          <ion-card>
-            <img src="{{item}}" *ngIf="item != 'N/A'">
-          </ion-card>
-        </ion-slide>
-      </ion-slides>
+  <ion-slides  [options]="slideOpts" autoplay>
+    <ion-slide *ngFor="let item of result.stillcuts">
+      <ion-card>
+        <img src="{{item}}" *ngIf="item != 'N/A'">
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
 
 </ion-content>

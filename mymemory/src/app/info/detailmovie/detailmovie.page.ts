@@ -12,9 +12,9 @@ export class DetailmoviePage implements OnInit {
   result = null;
 
   slideOpts={
-    initialSlide: 1,
-    speed: 1000,
-    slidesPerView: 1
+    slidesPerView:1,
+    autoplay: {delay:3000},
+    speed:2000
   }
 
   constructor(private activatedRouter: ActivatedRoute, private movieService: MovieService) { }
@@ -25,6 +25,8 @@ export class DetailmoviePage implements OnInit {
       this.result = res;
       console.log(this.result);
     })
+
+    
 
 
   }

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="grad">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -8,26 +8,26 @@
 </ion-header>
 
 <ion-content>
+    <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let item of (playingMovies | async)">
+          <ion-card >
+            <img src="https://image.tmdb.org/t/p/w500{{item.backdrop_path}}" >
+            <div class="title-wrap">
+                <p id='title1'>{{item.title}}</p>
+                <p id='title2'>{{item.original_title}}</p>
+            </div>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+
+    
     <div class="wrap">
       <ion-row>
-        <ion-col class="ion-padding" size="6">
-          <div [routerLink]="['/mypage']">
-            <img src="assets/img/home/icon_books.png">
-            <ion-label>책</ion-label>
-          </div>
-        </ion-col>
+        
         <ion-col class="ion-padding" size="6">
           <div (click)="goReviewbook()">
             <img src="assets/img/home/icon_movie.png">
             <ion-label>영화</ion-label>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ion-padding" size="6">
-          <div>
-            <img src="assets/img/home/icon_tv.png">
-            <ion-label>TV프로그램</ion-label>
           </div>
         </ion-col>
         <ion-col class="ion-padding" size="6">
@@ -46,7 +46,7 @@
         </ion-col>
         <ion-col class="ion-padding" size="6">
           <div>
-            <img src="assets/img/home/icon_like.png"(click)="logout()">
+            <img src="assets/img/home/icon_like.png"(click)="chat()">
             <ion-label>즐겨찾기</ion-label>
           </div>
         </ion-col>

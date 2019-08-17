@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { MovieService } from 'src/app/services/movie.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -12,30 +14,36 @@ export class MainPage implements OnInit {
 
   private loading;
 
-  constructor(private authService: AuthService,private router: Router, private loadingController: LoadingController) { }
+  constructor(private authService: AuthService,private router: Router, private movieService: MovieService) { }
+  
+  playingMovies: Observable<any>
+  sliderConfig={
+    slidesPerView:1,
+    autoplay: {
+      delay:3000,
+      disableOnInteraction:false
+    },
+    speed:2000,
+
+  }
+
 
   ngOnInit() {
+    this.loadPlayingMovie();
+  }
+
+  loadPlayingMovie(){
+    this.playingMovies = this.movieService.playingMovie();
   }
 
   goReviewbook(){
-    // this.loadingController.create({
-    //   message: 'Loading',
-    //   spinner: 'crescent',
-    //   cssClass:'custom-loader-class'
-    // }).then((overlay)=>{
-    //   this.loading = overlay;
-    //   this.loading.present();
-    // })
-    
-    // setTimeout(()=>{
-    //   this.router.navigateByUrl('/reviewbook/list');
-    //   this.loading.dismiss();
-      
-    // },500);
     this.router.navigateByUrl('/reviewbook/list');
   }
 
   logout() {
     this.authService.logout();
+  }
+  chat(){
+    this.router.navigateByUrl('/chat');
   }
 }

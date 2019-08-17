@@ -19,6 +19,9 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { LoadingService } from './services/loading.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 
 
@@ -27,7 +30,7 @@ export function jwtOptionsFactory(storage) {
     tokenGetter: () => {
       return storage.get('access_token');
     },
-    whitelistedDomains: ['192.168.1.185:5000']
+    whitelistedDomains: ['172.30.1.52:5000']
   }
 }
  
@@ -39,6 +42,7 @@ export function jwtOptionsFactory(storage) {
   HttpClientModule,
   MoviePageModule,
   IonicStorageModule.forRoot(),
+  SocketIoModule.forRoot(config),
   JwtModule.forRoot({
     jwtOptionsProvider: {
       provide: JWT_OPTIONS,

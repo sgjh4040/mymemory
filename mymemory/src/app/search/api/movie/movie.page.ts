@@ -32,5 +32,14 @@ export class MoviePage implements OnInit {
   back(){
     this.modalController.dismiss();
   }
+  onKeyPressed(event){
+    console.log('onKeyPress')
+    console.log(event);
+    if(event.keyCode==13){
+      let activeElement = <HTMLElement>document.activeElement;
+      activeElement.blur();
+      
+    }
+  }
 
 }
