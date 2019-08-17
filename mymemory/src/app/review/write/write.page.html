@@ -14,8 +14,9 @@
 
   </ion-toolbar>
   <div>
-    <ion-item lines="none">
-      <ion-icon name="search" slot="end" (click)="openSearchMovieModal()"></ion-icon>
+    <ion-item lines="none" class="wrap">
+        <rating [(rating)]="rating" ></rating>
+      <ion-icon name="search" (click)="openSearchMovieModal()"></ion-icon>
     </ion-item>
   </div>
 
@@ -27,13 +28,18 @@
 
   <form [formGroup]="reviewForm">
     <ion-grid>
-      <!-- <ion-input hidden value="{{rating}}" formControlName="review_score"></ion-input> -->
+      <ion-input hidden value="{{rating}}" formControlName="rating"></ion-input>
       <ion-row *ngIf="movie">
         <ion-col size='4'>
-          <ion-img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" *ngIf="movie.poster_path;">
-          </ion-img>
-          <ion-img src="../../../assets/icon/movie.png" *ngIf="!movie.poster_path;">
-          </ion-img>
+            <div class="image-wrap">
+                <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" *ngIf="movie.poster_path; else defaultImage">
+              </div>
+              <ng-template #defaultImage>
+                  <div class="default-image">
+                    <p>No</p>
+                    <p>Image</p>
+                  </div>
+                </ng-template>
           <ion-input hidden value="{{movie.poster_path}}" formControlName="poster_path"></ion-input>
         </ion-col>
         <ion-col size='8'>
@@ -79,11 +85,11 @@
             <ion-input type="text" style="text-align: right" placeholder="원"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">명대사</ion-label>
+            <ion-label class="stacked" position="stacked">명대사</ion-label>
             <ion-input type="text" formControlName="famouse_line"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">감상평</ion-label>
+            <ion-label class="stacked" position="stacked">감상평</ion-label>
             <ion-input type="text" formControlName="review"></ion-input>
           </ion-item>
           <ion-item>
