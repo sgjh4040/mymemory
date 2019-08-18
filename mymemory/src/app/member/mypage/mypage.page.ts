@@ -8,12 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./mypage.page.scss'],
 })
 export class MypagePage implements OnInit {
-
+  nickname:string ='';
   constructor(private imageService: ImagesService,private authService: AuthService) { }
 
   ngOnInit() {
     this.imageService.images=[];
     this.imageService.STORAGE_KEY= this.authService.user.id;
+    this.nickname = this.authService.user.nickname;
     this.imageService.loadStoragedImage();
   }
 

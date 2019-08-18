@@ -14,8 +14,8 @@
     <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
 
 
-    <ion-item button *ngFor="let item of (results | async)"  >
-      <div [routerLink]="['/review/detail',item._id]">{{item.title}}</div>
+    <ion-item button [routerLink]="['/review/detail',item._id]" *ngFor="let item of (results | async)"  >
+      <div>{{item.title}}</div>
       <div>{{item.liker.length}}</div>
       
 
