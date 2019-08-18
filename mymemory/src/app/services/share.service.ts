@@ -16,8 +16,8 @@ export class ShareService {
 
   constructor(private http: HttpClient, private alertController: AlertController,private socialSharing: SocialSharing) { }
 
-  getreview(id){
-    return this.http.get(`${this.serverurl}/api/search/review/${id}`);
+  getreview(id,role){
+    return this.http.get(`${this.serverurl}/api/search/review/${id}?role=${role}`);
   }
   addliker(id){
     return this.http.get(`${this.serverurl}/api/search/reviewup/${id}`).pipe(

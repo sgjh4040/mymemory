@@ -8,7 +8,7 @@ import { ShareService } from 'src/app/services/share.service';
   styleUrls: ['./movie.page.scss'],
 })
 export class MoviePage implements OnInit {
-
+  role = 'review';
   searchTerm: string='';
   results: Observable<any>;
 
@@ -18,7 +18,9 @@ export class MoviePage implements OnInit {
   }
 
   searchChanged(){
-    this.results =this.shareService.getreview(this.searchTerm);
+    console.log(this.role);
+    this.results =this.shareService.getreview(this.searchTerm,this.role);
+    
   };
 
 }

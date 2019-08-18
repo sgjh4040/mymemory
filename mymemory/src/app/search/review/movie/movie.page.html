@@ -1,4 +1,5 @@
 <ion-header>
+  
     <ion-toolbar>
         <ion-buttons slot="start">
           <ion-back-button defaultHref="/"></ion-back-button>
@@ -8,15 +9,22 @@
           <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
         </ion-buttons>
       </ion-toolbar>
+      
 </ion-header>
 
 <ion-content>
+  <ion-item lines="none">
+    <ion-select [(ngModel)]='role' interface="popover" slot="start">
+        <ion-select-option value="review">최신순</ion-select-option>
+        <ion-select-option value="liker_cnt">추천순</ion-select-option>
+        <ion-select-option value="view_cnt">조회순</ion-select-option>
+      </ion-select>
     <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
-
+  </ion-item>
 
     <ion-item button [routerLink]="['/review/detail',item._id]" *ngFor="let item of (results | async)"  >
       <div>{{item.title}}</div>
-      <div>{{item.liker.length}}</div>
+      <div>{{item.liker_size}}</div>
       
 
     </ion-item>
