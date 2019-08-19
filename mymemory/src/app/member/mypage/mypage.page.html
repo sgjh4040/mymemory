@@ -9,20 +9,12 @@
 </ion-header>
 
 <ion-content>
-  <div>{{imageService.STORAGE_KEY}}</div>
   <h3 *ngIf="imageService.images.length == 0" text-center>프로필 설정해주세요!</h3>
-
-  <div *ngFor="let img of imageService.images; index as pos">
-    <div>img.path:{{img.path}}</div>
-    <div>img.filepath:{{img.filePath}}</div>
-    <img src='ionic://localhost/_app_file_/var/mobile/Containers/Data/Application/98DE5D18-233D-49E7-8014-82D62821CF06/Library/NoCloud/1565781010940.jpg'>
-    <img [src]="img.path">
-  </div>
 
 
   <ion-avatar style="margin: 10pt auto;">
-    <img src="../../../assets/icon/account.png"*ngIf="imageService.images.length == 0">
-    <img [src]="imageService.images[0]?.path" *ngIf="imageService.images.length != 0">
+    <img [src]='imageService.profile'>
+    <!-- <img [src]="imageService.images[0]?.path" *ngIf="imageService.images.length != 0"> -->
   </ion-avatar>
 
   <ion-item>
@@ -35,7 +27,7 @@
     <ion-input type="text" value='{{authService.user.email}}' readonly></ion-input>
 
   </ion-item>
-  <ion-item button>
+  <ion-item button (click)='uploadprofile()'>
     <ion-icon name="person"></ion-icon>
     <ion-label>
       <h3>프로필 수정</h3>

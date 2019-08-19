@@ -54,8 +54,11 @@ reviewController.checkReview);
 routes.get('/cgvinfo',cgvController.findmovies);
 routes.get('/cgvdetail/:url',cgvController.detailmovie);
 
-routes.put('/images/:id',imageController.upload.single('file'), imageController.uploadImg);
 
+//image 업로드
+routes.post('/images',passport.authenticate('jwt', { session: false }),imageController.upload.single('file'), imageController.uploadImg);
+//profile 불러오기
+routes.get('/images/:id',userController.getProfile);
 
  
 module.exports = routes;

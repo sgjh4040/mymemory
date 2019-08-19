@@ -107,7 +107,7 @@ var write = {
             if (err) {
                 return res.status(400).json({ 'msg': err });
             }
-            Reviewlist.findByIdAndUpdate(req.body.reviewlist_id, { '$push': { 'reviews': result._id  } }, { 'upsert': true, 'new': true }, (err2, result) => {
+            Reviewlist.findByIdAndUpdate(req.body.reviewlist_id, { '$push': { 'reviews': result._id  } }, { 'upsert': true, 'returnNewDocument': true }, (err2, result) => {
                 if (err2) {
                     return res.status(400).json({ 'msg': err2 });
                 }

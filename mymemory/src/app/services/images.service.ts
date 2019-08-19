@@ -7,6 +7,8 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { finalize, tap, catchError, find } from 'rxjs/operators';
+import { async } from 'q';
+import { AuthService } from './auth.service';
 
 
 // const STORAGE_KEY = 'abc';
@@ -18,11 +20,12 @@ export class ImagesService {
   STORAGE_KEY = 'abc'
   images = [];
   reviewId = '123';
+  profile='';
 
   constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
     private actionSheetController: ActionSheetController, private toastController: ToastController,
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
-    private filePath: FilePath) { }
+    private filePath: FilePath,private authService: AuthService) { }
 
 
   loadStoragedImage() {
@@ -186,7 +189,7 @@ export class ImagesService {
     });
     await loading.present();
 
-    this.http.put("http://172.30.1.55:5000/api/images/"+'123', formData)
+    this.http.post("http://172.30.1.52:5000/api/images/", formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
@@ -202,6 +205,7 @@ export class ImagesService {
         console.log('succes',res['success']);
         if (res['success']) {
           this.presentToast('File upload complete.')
+          this.profile= 'http://172.30.1.52:5000/api/images/'+this.authService.user.id+'?'+(new Date()).getTime();
           
         } else {
           this.presentToast('File upload failed.')
@@ -232,5 +236,48 @@ export class ImagesService {
       duration: 3000
     });
     toast.present();
+  }
+
+  async selectProfile(){
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Select Image Source',
+      buttons: [
+        {
+          text: '갤러리 열기',
+          handler:() => {
+            this.uploadProfile(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: '카메라 열기',
+          handler: () => {
+            this.uploadProfile(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: '취소',
+          role: 'cancel'
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+  async uploadProfile(sourceType){
+    console.log('uploadProfile 메소드');
+    let options = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+      // encodingType: this.camera.EncodingType.JPEG,
+      // mediaType: this.camera.MediaType.PICTURE
+    };
+    let imagePath = await this.camera.getPicture(options);
+    let entry = await this.file.resolveLocalFilesystemUrl(imagePath);
+    let file = await this.getfile(entry);
+    this.readFile(file);
+
+
   }
 }

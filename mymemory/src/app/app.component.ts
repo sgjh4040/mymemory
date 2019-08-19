@@ -19,19 +19,20 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // this.initializeApp();
+    this.initializeApp();
   }
 
   initializeApp() {
+    console.log('initializeApp')
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
       this.authService.authenticationState.subscribe(state => {
         if (state) {
-          this.router.navigate(['main']);
+          this.router.navigate(['menu/main']);
         } else {
-          this.router.navigate(['login']);
+          this.router.navigate(['menu/main']);
         }
       });
     });

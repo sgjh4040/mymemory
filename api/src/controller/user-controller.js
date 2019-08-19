@@ -1,7 +1,10 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
+var path = require('path');
 var config = require('../config/config');
 var Review = require('../models/review');
+
 
  
 function createToken(user) {
@@ -69,3 +72,21 @@ exports.loginUser = (req, res) => {
         });
     });
 };
+
+exports.getProfile = (req,res)=>{
+    let user_id = req.params.id;
+    User.findById(user_id,{profile_img:1},(err,user)=>{
+        console.log(user);
+        if (err) {
+            return res.status(400).send({ 'msg': err });
+        }
+        if(user.profile_img == null ||user.profile_img == ''){
+            return;
+        }
+        res.setHeader('Content-Type', 'image/jpeg');
+        fs.createReadStream(path.join('uploads', user.profile_img.filename)).pipe(res);
+        
+
+    })
+    
+  }
