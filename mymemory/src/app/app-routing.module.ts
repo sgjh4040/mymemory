@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
   { path: 'sign-up', loadChildren: './member/sign-up/sign-up.module#SignUpPageModule' },
   { path: 'detail-movie', loadChildren: './pages/detail-movie/detail-movie.module#DetailMoviePageModule' },
+  { path: 'review/edit/:id', loadChildren: './review/edit/edit.module#EditPageModule' },
 ];
 
 @NgModule({

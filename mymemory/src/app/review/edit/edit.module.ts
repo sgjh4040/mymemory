@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
-import { WritePage } from './write.page';
+
+import { EditPage } from './edit.page';
 import { ComponentsModule } from 'src/app/components/component.module';
 
 
@@ -11,7 +13,7 @@ import { ComponentsModule } from 'src/app/components/component.module';
 const routes: Routes = [
   {
     path: '',
-    component: WritePage
+    component: EditPage
   }
 ];
 
@@ -24,6 +26,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [WritePage]
+  declarations: [EditPage]
 })
-export class WritePageModule {}
+export class EditPageModule {}

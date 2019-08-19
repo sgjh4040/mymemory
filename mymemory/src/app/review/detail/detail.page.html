@@ -6,7 +6,7 @@
     <ion-title>나의 리뷰</ion-title>
 
     <ion-buttons slot="end">
-      <ion-button *ngIf='detail_review?.writer==user_id'>
+      <ion-button *ngIf='detail_review?.writer==user_id'(click)="gotoEdit(detail_review._id)">
         편집
       </ion-button>
     </ion-buttons>

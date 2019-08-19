@@ -58,6 +58,10 @@ export class DetailPage implements OnInit {
     }
     this.router.navigateByUrl('/login');
   }
+  //편집 page 로 이동
+  gotoEdit(id){
+    this.router.navigate(['review/edit', id]);
+  }
 
 
   async openDeleteAlert() {
