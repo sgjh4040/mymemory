@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ShareService } from 'src/app/services/share.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie',
@@ -12,7 +13,7 @@ export class MoviePage implements OnInit {
   searchTerm: string='';
   results: Observable<any>;
 
-  constructor(private shareService: ShareService) { }
+  constructor(private shareService: ShareService,private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,5 +23,8 @@ export class MoviePage implements OnInit {
     this.results =this.shareService.getreview(this.searchTerm,this.role);
     
   };
+  godetailreview(id){
+    this.router.navigate(['review/detail',id]);
+  }
 
 }

@@ -35,6 +35,7 @@ export class WritePage implements OnInit {
       genre: new FormControl(''),
       watch_date: new FormControl(''),
       poster_path: new FormControl(''),
+      backdrop_path: new FormControl(''),
       rating: new FormControl(''),
       famouse_line: new FormControl(''),
       review: new FormControl(''),

@@ -43,7 +43,7 @@
             {{review.review_score}}
             <p>
               <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
-                [style.color]="review.review_score >=num ? '#ffbf00':'grey'">
+                [style.color]="review.rating >=num ? '#ffbf00':'grey'">
               </ion-icon>
             </p>
             <p class="preview">{{review.overview}}</p>

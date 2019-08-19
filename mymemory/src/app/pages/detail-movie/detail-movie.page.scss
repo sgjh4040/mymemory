@@ -1,0 +1,25 @@
+*{
+    padding:0;
+    margin:0;
+}
+.image-wrap{
+    position: relative;
+    width: 100vw;
+    height: 56vw;
+}
+.poster{
+    position: absolute;
+    width: 26vw;
+    height: 39vw;
+    z-index: 4;
+    left: 20px;
+    top: 40vw;
+}
+.title{
+    padding-left: calc(29vw + 20px);
+    padding-top:12vw;
+    font-weight: bolder;
+}
+.poster-wrap{
+    height: 40vw;
+}

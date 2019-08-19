@@ -1,31 +1,63 @@
 <ion-header>
-  
-    <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-back-button defaultHref="/"></ion-back-button>
-        </ion-buttons>
-        <ion-title>리뷰 검색</ion-title>
-        <ion-buttons slot="end">
-          <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
-        </ion-buttons>
-      </ion-toolbar>
-      
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>리뷰 검색</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="info-stats" name="information-circle-outline" size="large"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
   <ion-item lines="none">
     <ion-select [(ngModel)]='role' interface="popover" slot="start">
-        <ion-select-option value="review">최신순</ion-select-option>
-        <ion-select-option value="liker_cnt">추천순</ion-select-option>
-        <ion-select-option value="view_cnt">조회순</ion-select-option>
-      </ion-select>
+      <ion-select-option value="review">최신순</ion-select-option>
+      <ion-select-option value="liker_cnt">추천순</ion-select-option>
+      <ion-select-option value="view_cnt">조회순</ion-select-option>
+    </ion-select>
     <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
   </ion-item>
 
-    <ion-item button [routerLink]="['/review/detail',item._id]" *ngFor="let item of (results | async)"  >
-      <div>{{item.title}}</div>
-      <div>{{item.liker_size}}</div>
-      
+  <ion-grid>
+    <ion-row>
+      <ion-col size='12' *ngFor="let review of (results|async)" (click)="godetailreview(review._id)">
+        <ion-card>
+          <img src="../../../assets/icon/movie.png" *ngIf="!review.backdrop_path" />
+          <img src="https://image.tmdb.org/t/p/w500{{review.backdrop_path}}" *ngIf="review.backdrop_path" />
+          <ion-card-header>
+            <ion-card-subtitle>
+              {{review.release_date|date:'y-MM'}}
+              <div style="float: right;">
+                <div style="display: flex;align-items: center">
+                  <ion-icon name='heart'></ion-icon>
+                  <span>{{review.liker.length}}</span>
+                  
+                    <ion-icon name='eye'></ion-icon>
+                    <span style="height: 100%">{{review.view_cnt}}</span>
+                  
+                </div>
+              </div>
 
-    </ion-item>
+            </ion-card-subtitle>
+            <ion-card-title>{{review.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{review.review_score}}
+            <p>
+              <ion-icon name="star" *ngFor="let num of [1,2,3,4,5]"
+                [style.color]="review.rating >=num ? '#ffbf00':'grey'">
+              </ion-icon>
+            </p>
+            <p class="preview">{{review.overview}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
 </ion-content>
