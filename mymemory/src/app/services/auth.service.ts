@@ -21,20 +21,25 @@ export class AuthService {
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController) {
     this.plt.ready().then(() => {
+      console.log('checkToken')
       this.checkToken();
     });
   }
  
   checkToken() {
     this.storage.get(TOKEN_KEY).then(token => {
+      console.log('token',token);
       if (token) {
         let decoded = this.helper.decodeToken(token);
         let isExpired = this.helper.isTokenExpired(token);
  
         if (!isExpired) {
+          console.log('토큰존재')
           this.user = decoded;
           this.authenticationState.next(true);
+          console.log(this.authenticationState.value);
         } else {
+          console.log('토큰없음');
           this.storage.remove(TOKEN_KEY);
         }
       }

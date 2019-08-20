@@ -5,6 +5,7 @@ import { MovieService } from 'src/app/services/movie.service';
 import { ShareService } from 'src/app/services/share.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImagesService } from 'src/app/services/images.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-detail',
@@ -40,9 +41,11 @@ export class DetailPage implements OnInit {
       this.detail_review = result;
       this.imageService.STORAGE_KEY = this.detail_review.images_id;
       this.imageService.loadStoragedImage();
+    
 
-      // console.log('detail정보', this.detail_review);
+      
     });
+
     
   }
   ngDoCheck() {

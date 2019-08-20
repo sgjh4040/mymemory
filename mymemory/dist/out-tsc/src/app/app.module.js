@@ -12,13 +12,19 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { MoviePageModule } from './search/api/movie/movie.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { File } from '@ionic-native/File/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { LoadingService } from './services/loading.service';
+import { SocketIoModule } from 'ngx-socket-io';
+const config = { url: 'http://172.30.1.52:5000', options: {} };
 export function jwtOptionsFactory(storage) {
     return {
         tokenGetter: () => {
             return storage.get('access_token');
         },
-        whitelistedDomains: ['172.30.1.13:5000']
+        whitelistedDomains: ['172.30.1.52:5000']
     };
 }
 let AppModule = class AppModule {
@@ -31,6 +37,7 @@ AppModule = tslib_1.__decorate([
             HttpClientModule,
             MoviePageModule,
             IonicStorageModule.forRoot(),
+            SocketIoModule.forRoot(config),
             JwtModule.forRoot({
                 jwtOptionsProvider: {
                     provide: JWT_OPTIONS,
@@ -43,7 +50,11 @@ AppModule = tslib_1.__decorate([
             SplashScreen,
             { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
             SocialSharing,
-            File
+            File,
+            Camera,
+            FilePath,
+            WebView,
+            LoadingService
         ],
         bootstrap: [AppComponent]
     })

@@ -1,14 +1,16 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { MovieService } from '../services/movie.service';
+import { from } from 'rxjs';
+import { map, tap, filter } from 'rxjs/operators';
 let HomePage = class HomePage {
     constructor(movieService) {
         this.movieService = movieService;
+        this.myArray = [1, 2, 3, 4, 5];
     }
-    search() {
-        console.log('메소드 실행');
-        this.results = this.movieService.searchCredit();
-        console.log(this.results);
+    ngOnInit() {
+        const obserable$ = from(this.myArray);
+        this.subscription = obserable$.pipe(map(item => item * 2), filter(res => res > 4), tap(item => console.log(item))).subscribe();
     }
 };
 HomePage = tslib_1.__decorate([

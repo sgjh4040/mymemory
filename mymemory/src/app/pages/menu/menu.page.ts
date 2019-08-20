@@ -30,7 +30,6 @@ export class MenuPage implements OnInit {
    }
 
   ngOnInit() {
-    console.log('로그인 상태',this.authService.isAuthenticated());
     if(this.authService.isAuthenticated()){
       this.auth_state=true;
     }else{

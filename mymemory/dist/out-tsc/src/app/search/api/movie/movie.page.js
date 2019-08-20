@@ -23,6 +23,14 @@ let MoviePage = class MoviePage {
     back() {
         this.modalController.dismiss();
     }
+    onKeyPressed(event) {
+        console.log('onKeyPress');
+        console.log(event);
+        if (event.keyCode == 13) {
+            let activeElement = document.activeElement;
+            activeElement.blur();
+        }
+    }
 };
 MoviePage = tslib_1.__decorate([
     Component({

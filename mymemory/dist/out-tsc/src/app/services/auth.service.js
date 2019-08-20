@@ -19,6 +19,7 @@ let AuthService = class AuthService {
         this.user = null;
         this.authenticationState = new BehaviorSubject(false);
         this.plt.ready().then(() => {
+            console.log('checkToken');
             this.checkToken();
         });
     }
@@ -28,8 +29,10 @@ let AuthService = class AuthService {
                 let decoded = this.helper.decodeToken(token);
                 let isExpired = this.helper.isTokenExpired(token);
                 if (!isExpired) {
+                    console.log('토큰존재');
                     this.user = decoded;
                     this.authenticationState.next(true);
+                    console.log(this.authenticationState.value);
                 }
                 else {
                     this.storage.remove(TOKEN_KEY);
