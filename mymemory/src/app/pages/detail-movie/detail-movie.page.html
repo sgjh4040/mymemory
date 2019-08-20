@@ -1,62 +1,68 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>영화 상세</ion-title>
-  
-  
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>영화 상세</ion-title>
 
-<ion-content fullscreen>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen *ngIf='result'>
   <div class='image-wrap'>
-    <img src='https://image.tmdb.org/t/p/w500_and_h282_face/4tu7fg5H8Gad5W0Tu7QlFFU4AnX.jpg'>
-    <img class="poster" src='https://image.tmdb.org/t/p/w116_and_h174_face/kwCvv1QYjooAqIOBWf7pOrRSmrt.jpg'>
+    <img src='https://image.tmdb.org/t/p/w500_and_h282_face{{result.backdrop_path}}'>
+    <img class="poster" src='https://image.tmdb.org/t/p/w116_and_h174_face{{result.poster_path}}'>
 
   </div>
   <div class='poster-wrap'>
-    <h2 class="title">엑시트<span>(2019)</span></h2>
-    
-  </div>
-  <ion-item>
-      <ion-label position='stacked' class="overview">줄거리</ion-label>
-      <ion-textarea>
-          대학교 산악 동아리 에이스 출신이지만 졸업 후 몇 년째 취업 실패로 눈칫밥만 먹는 용남은 온 가족이 참석한 어머니의 칠순 잔치에서 연회장 직원으로 취업한 동아리 후배 의주를 만난
-      </ion-textarea>
-    </ion-item>
+    <h2 class="title">{{result.title}}<span>({{result.release_date|date:'yyyy'}})</span></h2>
 
-  
-        <div style="margin-left:20px;">
-          <div>출현진</div>
+  </div>
+
+  <ion-item>
+    <ion-label position='stacked' class="overview">줄거리</ion-label>
+    <ion-textarea>
+      {{result.overview}}
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item lines='none'>
+    <ion-label position="fixed">출현진</ion-label>
+  </ion-item>
+  <div style="margin-left:20px;">
     <ion-slides [options]="slideOpts">
-        <ion-slide >
-          <ion-card >
-            <img src='https://image.tmdb.org/t/p/w120_and_h133_face/pQ2YXshbrC0CiKGCZfswV4PhF2d.jpg'>
-            <ion-card-content>
-              zzzzzzzzzzzzzzzzzzzzzz
+      <ion-slide *ngFor="let cast of (casts|async)">
+        <ion-card>
+          <img src='https://image.tmdb.org/t/p/w120_and_h133_face{{cast.profile_path}}'>
+          <ion-card-content>
+            {{cast.name}}
+          </ion-card-content>
+          <ion-card-content class="character">
+              {{cast.character}}
             </ion-card-content>
-          </ion-card>
-        </ion-slide>
-        <ion-slide >
-          <ion-card>
-            <img src='https://image.tmdb.org/t/p/w120_and_h133_face/pQ2YXshbrC0CiKGCZfswV4PhF2d.jpg'>
-          </ion-card>
-        </ion-slide>
-        <ion-slide >
-          <ion-card>
-            <img src='https://image.tmdb.org/t/p/w120_and_h133_face/pQ2YXshbrC0CiKGCZfswV4PhF2d.jpg'>
-          </ion-card>
-        </ion-slide>
+        </ion-card>
+      </ion-slide>
+
     </ion-slides>
 
-    <ion-item>
-      <ion-label>
-        미디어
-      </ion-label>
-      
-    </ion-item>
   </div>
-
-
+  <ion-item lines='none'>
+      <ion-label position="fixed">영화 영상</ion-label>
+    </ion-item>
+  <div style="margin-left:20px;">
+      <ion-slides >
+          <ion-slide *ngFor="let video of videos">
+            <ion-card>
+                <ion-card-title style="margin: 10px 0">
+                  {{video.name}}
+                </ion-card-title>
+                <iframe width="220" height="150" [src]='video.trustedVideoUrl' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </ion-card>
+          </ion-slide>
+    
+        </ion-slides>
+   
+  </div>
+  
 </ion-content>

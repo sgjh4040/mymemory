@@ -92,6 +92,22 @@ export class MovieService {
       
       
     )
+  };
+  //출현진 검색
+  searchCasts(id:any):Observable<any>{
+    return this.http.get(`${this.detailurl}/movie/${id}/credits?api_key=${this.apiKey}`).pipe(
+      map(results=>{
+        return results['cast'];
+      })
+    )
+  }
+  //video 검색
+  searchVideos(id:any):Observable<any>{
+    return this.http.get(`${this.detailurl}/movie/${id}/videos?api_key=${this.apiKey}&language=ko-kr`).pipe(
+      map(results=>{
+        return results['results'];
+      })
+    )
   }
 
 
@@ -107,7 +123,7 @@ export class MovieService {
   };
   //영화 detail 검색
   detailMovie(title: string, type: string): Observable<any>{
-    return this.http.get(`${this.detailurl}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`);
+    return this.http.get(`${this.detailurl}/${type}/${title}?language=ko-kr&api_key=${this.apiKey}`);
   };
   //영화 상형작 검색
   playingMovie():Observable<any>{

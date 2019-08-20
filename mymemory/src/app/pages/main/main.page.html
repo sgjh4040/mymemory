@@ -10,7 +10,7 @@
 <ion-content>
     <ion-slides [options]="sliderConfig">
         <ion-slide *ngFor="let item of (playingMovies | async)">
-          <ion-card >
+          <ion-card [routerLink]="['/detail-movie/',item.id]">
             <img src="https://image.tmdb.org/t/p/w500{{item.backdrop_path}}" >
             <div class="title-wrap">
                 <p id='title1'>{{item.title}}</p>
