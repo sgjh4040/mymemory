@@ -47,9 +47,11 @@
       </ion-item>
     </ion-row>
     <ion-row>
-      <ion-item>
-        <ion-label position='stacked' class="overview">줄거리</ion-label>
-        <ion-textarea>
+      <ion-item lines='none'>
+        <ion-label class="sub">줄거리</ion-label>
+      </ion-item>
+      <ion-item >
+        <ion-textarea  rows="6" cols="20">
           {{result.overview}}
         </ion-textarea>
       </ion-item>
@@ -58,8 +60,10 @@
 
 
 
-  <div>스틸컷</div>
-  <ion-slides  [options]="slideOpts" autoplay>
+  <ion-item lines='none'>
+      <ion-label class="sub">스틸컷</ion-label>
+    </ion-item>
+  <ion-slides [options]="slideOpts" autoplay>
     <ion-slide *ngFor="let item of result.stillcuts">
       <ion-card>
         <img src="{{item}}" *ngIf="item != 'N/A'">

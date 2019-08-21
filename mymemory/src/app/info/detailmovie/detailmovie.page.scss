@@ -1,8 +1,18 @@
+ion-item {
+    --inner-padding-top:7px;
+    --inner-padding-bottom:7px;
+    vertical-align: middle;
+    align-content: center;
+    align-items: center;
+}
+
+
 p{
     margin:5px;
 }
 #title1{
     font-size: 20px;
+    font-weight: 550;
     
 }
 #title2{
@@ -11,14 +21,20 @@ p{
 }
 #rate{
     font-size: 13px;
-    color: #bbbbbb;
+    color: rgb(65, 65, 65);
 }
 #view{
     font-size: 13px;
-    color: #bbbbbb;
+    color: rgb(65, 65, 65);
 }
 .overview{
     font-size: 15px;
     font-weight: bolder;
+}
+ion-item>ion-label.sub {
+    font-size: 14px;
+    margin: 0px 3px;
+    font-weight: 550;
+    --color: rgb(65, 65, 65);   
 }
 

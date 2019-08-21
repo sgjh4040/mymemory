@@ -21,13 +21,13 @@ ion-card-header {
 ion-card-title {
     font-size: 20px;
     overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            word-wrap:break-word; 
-            line-height: 1.2em;
-            height: 1.2em;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 1.2em;
+    height: 1.2em;
 }
 
 ion-card-subtitle {

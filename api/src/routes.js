@@ -19,7 +19,7 @@ routes.post('/login', userController.loginUser);
 routes.post('/list', passport.authenticate('jwt', { session: false }), reviewController.registerlist);
 
 //list 불러오기
-routes.get('/list', passport.authenticate('jwt', { session: false }),reviewController.showlist);
+routes.get('/list', passport.authenticate('jwt', { session: false }),reviewController.showlists);
 //list 삭제
 routes.delete('/list/:id',reviewController.deletelist);
 

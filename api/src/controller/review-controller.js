@@ -38,6 +38,20 @@ var write = {
             return res.json(result)
         });
     },
+    //aync await 써보기
+    showlists: async (req,res)=>{
+        try{
+            let list =await Reviewlist.find({ writer: req.user.id }).populate('reviews');
+            if (!list){
+                return res.status(400).json({ 'msg': err });
+            }
+            return res.json(list);
+        }catch(error){
+            console.log(error);
+        }
+        
+
+    },
     //리뷰 불러오기
     showreview: (req, res) => {
         let reviewlist_id = req.params.id;

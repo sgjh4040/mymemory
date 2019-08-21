@@ -1,25 +1,62 @@
 <ion-content>
+  <ion-searchbar (ionChange)="searchChanged($event)" (keypress)="onKeyPressed($event)">
+  </ion-searchbar>
 
+  <ion-list>
+    <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/detail-movie/',item.id]">
+      <div class="image-wrap">
+        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.image != 'N/A'">
+      </div>
+
+      <ion-label text-wrap>
+        <h3 class="movie-title">{{item.title}}</h3>
+        <p class="movie-date">{{item.release_date}}</p>
+        <ion-text style="overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              word-wrap:break-word; 
+              line-height: 1.2em;
+              height: 3.6em;">{{item.overview}}</ion-text>
+
+      </ion-label>
+
+      <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+
+    </ion-item>
+
+  </ion-list>
+
+  <ion-item>
+      <ion-label class="sub">최신 개봉작</ion-label>
+    </ion-item>
   <ion-slides [options]="sliderConfig">
     <ion-slide *ngFor="let item of (playingMovies | async)">
-      <ion-card >
-        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'"style="height: 200px;">
-        <ion-card-content>
-          <div>{{item.title}}</div>
-        </ion-card-content>
+      <ion-card [routerLink]="['/detail-movie/',item.id]">
+        <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}" *ngIf="item.poster_path != 'N/A'"
+          style="height: 200px;">
+          <ion-card-header>
+              <ion-card-subtitle>
+                {{item.release_date|date:'y-MM'}}
+              </ion-card-subtitle>
+              <ion-card-title>{{item.title}}</ion-card-title>
+            </ion-card-header>
       </ion-card>
     </ion-slide>
   </ion-slides>
 
 
-  <div>현재 상영작(CGV)</div>
+  <ion-item>
+    <ion-label class="sub">현재 상영작(CGV)</ion-label>
+  </ion-item>
   <ion-slides [options]="sliderConfig">
 
     <ion-slide *ngFor="let item of (cgvMovies | async)">
       <ion-card [routerLink]="['/detailmovie',item.detailId]">
         <img src="{{item.image}}" *ngIf="item.poster_path != 'N/A'">
         <ion-card-content>
-          <div>{{item.title}}</div>
+          <h2>{{item.title}}</h2>
           <div>순위: {{item.rank}}</div>
           <div>예매율: {{item.percent}}</div>
         </ion-card-content>

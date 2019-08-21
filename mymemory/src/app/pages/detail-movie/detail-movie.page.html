@@ -19,9 +19,10 @@
     <h2 class="title">{{result.title}}<span>({{result.release_date|date:'yyyy'}})</span></h2>
 
   </div>
-
+  <ion-item lines='none'>
+    <ion-label position="fixed">줄거리</ion-label>
+  </ion-item>
   <ion-item>
-    <ion-label position='stacked' class="overview">줄거리</ion-label>
     <ion-textarea>
       {{result.overview}}
     </ion-textarea>

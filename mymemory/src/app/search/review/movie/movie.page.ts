@@ -25,6 +25,6 @@ export class MoviePage implements OnInit {
   };
   godetailreview(id){
     this.router.navigate(['review/detail',id]);
-  }
+  };
 
 }
