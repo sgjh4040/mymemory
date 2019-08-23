@@ -22,6 +22,7 @@ export class HomePage implements OnInit {
   }
   a:any;
   b:any;
+  c:any;
 
 
   myArray=[1,2,3,4,5];
