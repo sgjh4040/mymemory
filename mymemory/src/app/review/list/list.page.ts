@@ -14,27 +14,28 @@ export class ListPage implements OnInit {
   list= null;
 
   constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,route: ActivatedRoute,private router: Router,private loading:LoadingService) { 
-    route.params.subscribe(val=>{
-      this.loading.presentLoading().then(()=>{
-        this.list_id = this.activateRoute.snapshot.paramMap.get('id');
-      this.movieService.getreview(this.list_id).subscribe(res=>{
-        this.list = res;
-        console.log('this.list',this.list);
-        this.loading.dismissLoading();
-      });
-      })
-      
-
-      
-      
-    });
-    
-
+    // route.params.subscribe(val=>{
+    //   this.loading.presentLoading().then(()=>{
+    //   })
+    // });
   }
  
 
   ngOnInit() {
+    this.list_id = this.activateRoute.snapshot.paramMap.get('id');
+    this.getReviews();
    
+  }
+  ionViewWillEnter(){
+    console.log("ionViewWillEnter");
+    this.getReviews();
+  }
+  getReviews(){
+    this.movieService.getreview(this.list_id).subscribe(res=>{
+      this.list = res;
+      console.log('this.list',this.list);
+    });
+    
   }
   godetailreview(id){
     this.router.navigate(['review/detail',id]);
