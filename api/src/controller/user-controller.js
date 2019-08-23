@@ -12,15 +12,15 @@ function createToken(user) {
         expiresIn: 2400 // 86400 expires in 24 hours
       });
 }
-exports.testWrite = (req,res)=>{
-    let newUser = Review(req.body);
-    newUser.save((err, result) => {
-        if (err) {
-            return res.status(400).json({ 'msg': err });
-        }
-        return res.status(201).json(result);
-    });
-}
+// exports.testWrite = (req,res)=>{
+//     let newUser = Review(req.body);
+//     newUser.save((err, result) => {
+//         if (err) {
+//             return res.status(400).json({ 'msg': err });
+//         }
+//         return res.status(201).json(result);
+//     });
+// }
 
 exports.registerUser = (req, res) => {
     console.log(req.body.passwordGroup.password);
