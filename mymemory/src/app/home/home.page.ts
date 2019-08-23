@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
     ).subscribe()
     
   }
+  a:any;
 
 
   myArray=[1,2,3,4,5];
