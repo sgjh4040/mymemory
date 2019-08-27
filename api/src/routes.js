@@ -6,8 +6,8 @@ var reviewController = require('./controller/review-controller');
 var cgvController = require('./controller/cgv-controller');
 var imageController = require('./controller/image-controller');
 var kakaoController = require('./controller/kakaoController');
-var request = require('request');
-
+// var request = require('request');
+var kakaoApi = require('./kakaoapi/api');
 
 
 routes.get('/', (req, res) => {
@@ -68,31 +68,12 @@ routes.get('/kakao', kakaoController.getKey);
 
 routes.post('/token', (req, res) => {
     console.log(req.body.key);
-
-    var options = {
-        method: 'POST',
-        url: 'https://kauth.kakao.com/oauth/token',
-        headers:
-        {
-            'cache-control': 'no-cache',
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        form:
-        {
-            code: req.body.key,
-            grant_type: 'authorization_code',
-            redirect_uri: 'http://172.30.1.26:8100',
-            client_id: '6dec24132f91ea4e616064e20f98ec09'
-        }
-    };
-
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-
-        console.log(body);
-    });
-
-
+    kakaoApi.getToken(req.body.key,(token)=>{
+        console.log('token',token);
+        kakaoApi.getUser(token.access_token,(user)=>{
+            res.send(user);
+        })
+    })
 })
 
 module.exports = routes;
