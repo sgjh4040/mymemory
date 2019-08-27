@@ -1,6 +1,6 @@
 module.exports = {
     jwtSecret: 'long-live-the-ionic-academy',
-    db: 'mongodb://localhost/shary',
+    db: 'mongodb://localhost/db',
 
     //네이버 open api 
     client_id : '4BAZEL9fhMV7MnBiJx1T',
