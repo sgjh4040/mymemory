@@ -98,6 +98,8 @@ export class DetailPage implements OnInit {
   }
 
   async openShareAlert() {
+
+
     const alert = await this.alertController.create({
       header: '공유하기',
       message: '스포일러 주의! 공유내용에 감상평을 포함할까요?',

@@ -1,14 +1,15 @@
-var express     = require('express');
-var bodyParser  = require('body-parser');
-var passport	= require('passport');
-var mongoose    = require('mongoose');
-var config      = require('./config/config');
-var port        = process.env.PORT || 5000; 
-var cors        = require('cors');
-var webSocket = require('./socket');
-var logger = require('morgan');
- 
-var app = express();
+const express     = require('express');
+const bodyParser  = require('body-parser');
+const passport	= require('passport');
+const mongoose    = require('mongoose');
+const config      = require('./config/config');
+const port        = process.env.PORT || 5000; 
+const cors        = require('cors');
+const webSocket = require('./socket');
+const logger = require('morgan');
+const routes = require('./routes');
+const listRouter = require('./routes/list');
+const app = express();
 
 app.use(logger('dev'));
 app.use(cors());
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
  
 // Use the passport package in our application
 app.use(passport.initialize());
-var passportMiddleware = require('./middleware/passport');
+const passportMiddleware = require('./middleware/passport');
 passport.use(passportMiddleware);
  
 // Demo Route (GET http://localhost:5000)
@@ -27,8 +28,9 @@ app.get('/', function(req, res) {
   return res.send('Hello! The API is at http://localhost:' + port + '/api');
 });
  
-var routes = require('./routes');
+
 app.use('/api', routes);
+app.use('/api/list',listRouter);
  
 mongoose.connect(config.db, { useNewUrlParser: true , useCreateIndex: true});
  

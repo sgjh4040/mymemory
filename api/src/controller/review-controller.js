@@ -99,6 +99,24 @@ var write = {
             return res.json(result);
         })
     },
+    //리뷰 수정
+    editReview: (req,res)=>{
+        let writer = req.user._id;
+        req.body.writer = writer;
+
+        Review.findByIdAndUpdate(req.params.id,{
+            $set: req.body
+        },function(err,movie){
+            if(err){
+                console.log(err);
+            }
+            return res.status(201).json({
+                'msg': '리뷰 업데이트 성공',
+                'result': movie
+            })
+        })
+
+    },
 
     //리뷰 작성(subdocument 되어있을때)
     registerReview: (req, res) => {

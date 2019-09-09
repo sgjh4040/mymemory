@@ -25,8 +25,13 @@ routes.get('/list', passport.authenticate('jwt', { session: false }), reviewCont
 //list 삭제
 routes.delete('/list/:id', reviewController.deletelist);
 
+
+
 //review 작성
 routes.post('/review', passport.authenticate('jwt', { session: false }), reviewController.registerReviews);
+//review 수정
+routes.patch('/review/:id',passport.authenticate('jwt', { session: false }),
+reviewController.editReview)
 //리뷰 삭제
 routes.delete('/review/:id', reviewController.deleteReview);
 
@@ -40,9 +45,6 @@ routes.get('/review/detail/:id', reviewController.showDetailReview);
 //리뷰 검색(title로)
 routes.get('/search/review/:id', reviewController.findReviewBytitle);
 
-routes.get('/special', passport.authenticate('jwt', { session: false }), (req, res) => {
-    return res.json({ msg: `Hey ${req.user.email}! I open at the close.` });
-});
 //리뷰 좋아요 up
 routes.get('/search/reviewup/:id', passport.authenticate('jwt', { session: false }), reviewController.addliker);
 

@@ -1,9 +1,9 @@
-var Image = require('../models/image');
-var User = require('../models/user');
-var multer = require('multer');
+const Image = require('../models/image');
+const User = require('../models/user');
+const multer = require('multer');
 
  
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function(req,file,cb){
       cb(null,'uploads')
     },
@@ -11,12 +11,12 @@ var storage = multer.diskStorage({
       cb(null,file.fieldname+'-'+Date.now())
     }
   });
-var upload=  multer({storage:storage})
+const upload=  multer({storage:storage})
 
-var uploadImg = (req,res)=>{
-    let user_id = req.user._id;
+const uploadImg = (req,res)=>{
+    const user_id = req.user._id;
     // res.send(userId);
-    let newImage = new Image();
+    const newImage = new Image();
     // newImage.review_id = review_Id;
     newImage.filename = req.file.filename;
     newImage.originalName = req.file.originalname;

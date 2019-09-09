@@ -52,11 +52,6 @@ export class EditPage implements OnInit {
     setTimeout(function () {
       that.router.navigateByUrl(`/review/list/${that.list_id}`)
     }, 500);
-
-
-
-
-
   };
   async openSearchMovieModal() {
     const modal = await this.modalController.create({

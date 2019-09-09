@@ -26,21 +26,9 @@ export class RatingComponent implements OnInit {
   getColor(index:number){
     if(this.isAboveRating(index)){
       return COLORS.GREY;
+    }else{
+      return COLORS.YELLOW;
     }
-    switch (this.rating){
-      case 1:
-      case 2:
-        return COLORS.YELLOW;
-      case 3:
-        return COLORS.YELLOW;
-      case 4:
-      case 5:
-        return COLORS.YELLOW;
-      default:
-        return COLORS.GREY;
-    }
-
-
   }
 
   isAboveRating(index:number):boolean{

@@ -7,7 +7,6 @@ module.exports = () => {
         mongoose.set('debug', true);
       }
       mongoose.connect(config.db, { useNewUrlParser: true , useCreateIndex: true});
-      
     };
     connect();
     

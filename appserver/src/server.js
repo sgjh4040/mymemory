@@ -5,7 +5,7 @@ const morgan = require('morgan'); //req 요청 보기
 const connect = require('./schemas');
 const usersRouter = require('./routes/users');    //Userrouter
 const passportConfig = require('./passport');
-var cors        = require('cors');
+var cors= require('cors');
 require('dotenv').config();
 
 const app = express();

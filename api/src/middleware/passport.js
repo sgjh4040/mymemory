@@ -16,7 +16,7 @@ module.exports = new JwtStrategy(opts, function (jwt_payload, done) {
         if (user) {
             return done(null, user);
         } else {
-            return done(null, false);lkl
+            return done(null, false);
         }
     });
 });

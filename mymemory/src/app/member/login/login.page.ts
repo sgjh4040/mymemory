@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
       password: new FormControl('',[Validators.required, Validators.minLength(6)])
     })
   }
+  //로그인
   onSubmit(){
     this.authService.login(this.loginForm.value).subscribe(state=>{
       if(state!=null){
@@ -26,9 +27,10 @@ export class LoginPage implements OnInit {
       }
     });
   };
+  //회원가입, 회원가입 페이지로 이동
   register() {
     this.authService.register(this.loginForm.value).subscribe(res => {
-      // Call Login to automatically login the new user
+      // 회원가입이 되면 바로 로그인 메소드가 불려짐
       this.authService.login(this.loginForm.value).subscribe(state=>{
         if(state!=null){
           this.router.navigate(['/menu/main']);

@@ -1,4 +1,4 @@
-import { Injectable, ChangeDetectorRef } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/ngx';
 import { ActionSheetController, ToastController, Platform, LoadingController } from '@ionic/angular';
 import { File, FileEntry } from '@ionic-native/File/ngx';
@@ -7,8 +7,8 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { finalize, tap, catchError, find } from 'rxjs/operators';
-import { async } from 'q';
 import { AuthService } from './auth.service';
+import {environment} from '../../environments/environment';
 
 
 // const STORAGE_KEY = 'abc';
@@ -189,7 +189,7 @@ export class ImagesService {
     });
     await loading.present();
 
-    this.http.post("http://172.30.1.52:5000/api/images/", formData)
+    this.http.post(`http://${environment.url}/api/images/`, formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
@@ -205,7 +205,7 @@ export class ImagesService {
         console.log('succes',res['success']);
         if (res['success']) {
           this.presentToast('File upload complete.')
-          this.profile= 'http://172.30.1.52:5000/api/images/'+this.authService.user.id+'?'+(new Date()).getTime();
+          this.profile= `http://${environment.url}/api/images/${this.authService.user.id}?${(new Date().getTime())}`
           
         } else {
           this.presentToast('File upload failed.')
@@ -263,15 +263,12 @@ export class ImagesService {
     await actionSheet.present();
   }
   async uploadProfile(sourceType){
-    console.log('uploadProfile 메소드');
     let options = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true
-      // encodingType: this.camera.EncodingType.JPEG,
-      // mediaType: this.camera.MediaType.PICTURE
     };
     let imagePath = await this.camera.getPicture(options);
     let entry = await this.file.resolveLocalFilesystemUrl(imagePath);
