@@ -12,15 +12,16 @@ import { ImagesService } from 'src/app/services/images.service';
   styleUrls: ['./edit.page.scss'],
 })
 export class EditPage implements OnInit {
-  list_id: string;
+  review_id: string;
   reviewForm: FormGroup;
+  rating: number;
   movie = {};
   nowdate: String = new Date().toISOString();
 
   constructor(private activateRoute: ActivatedRoute, private movieService: MovieService, private modalController: ModalController, private router: Router, private nav: NavController, private imageService: ImagesService) { }
 
   ngOnInit() {
-    this.list_id = this.activateRoute.snapshot.paramMap.get('id');
+    this.review_id = this.activateRoute.snapshot.paramMap.get('id');
     this.imageService.images = [];
     this.reviewForm = new FormGroup({
       writer: new FormControl(''),
@@ -39,19 +40,25 @@ export class EditPage implements OnInit {
       tags: new FormControl(''),
 
     })
-
+    this.getMovie();
   }
+  ionViewWillEnter() {
+  }
+  getMovie() {
+    this.movieService.getDetailReview(this.review_id).subscribe(result => {
+      this.movie = result;
+      this.rating= this.movie['rating'];
+      console.log(this.movie);
+    });
+  }
+
   onSubmit() {
     let that = this;
-    this.reviewForm.value.reviewlist_id = this.list_id;
-    this.reviewForm.value.images_id = this.imageService.STORAGE_KEY;
-    console.log('저장내용', this.reviewForm.value);
-    this.movieService.writeReview(this.reviewForm.value).subscribe();
-
-    //서버 저장 시간 텀을 두기위해.
-    setTimeout(function () {
-      that.router.navigateByUrl(`/review/list/${that.list_id}`)
-    }, 500);
+    this.reviewForm.value.reviewlist_id = this.review_id;
+    console.log(this.reviewForm.value);
+    this.movieService.editReview(this.reviewForm.value,this.review_id).subscribe(()=>{
+      that.router.navigateByUrl(`/review/list/${that.review_id}`)
+    });
   };
   async openSearchMovieModal() {
     const modal = await this.modalController.create({

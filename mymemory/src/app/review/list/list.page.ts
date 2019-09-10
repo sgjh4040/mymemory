@@ -33,7 +33,6 @@ export class ListPage implements OnInit {
   getReviews(){
     this.movieService.getreview(this.list_id).subscribe(res=>{
       this.list = res;
-      console.log('this.list',this.list);
     });
     
   }

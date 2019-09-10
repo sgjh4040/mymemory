@@ -26,21 +26,26 @@ export class DetailMoviePage implements OnInit {
 
   ngOnInit() {
     this.detailId=this.activatedRouter.snapshot.paramMap.get('id');
+    //영화 detail
+    this.getMovie();
+    //영화 출현진
+    this.casts = this.movieService.searchCasts(this.detailId);
+    //영화 유트브 비디오
+    this.getVideo();
+    
+  }
+  getMovie() {
     this.movieService.detailMovie(this.detailId,this.type).subscribe(res=>{
       this.result=res;
     })
-    this.casts = this.movieService.searchCasts(this.detailId);
+  };
+  getVideo(){
     this.movieService.searchVideos(this.detailId).subscribe(res=>{
-      console.log(res);
       res.map(video=>{
       video['trustedVideoUrl']= this.doms.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+video['key']);
     })
     this.videos=res;
-    console.log(this.videos);
     });
-    
-    
-   
-  }
 
+  }
 }

@@ -16,7 +16,7 @@ export class DetailPage implements OnInit {
   colors = ["primary", "secondary", "tertiary", "success", "warning", "danger"];
   review_id: string;
   detail_review = null;
-  like_status= null;
+  like_status = null;
   user_id: string;
   private loading;
 
@@ -24,45 +24,40 @@ export class DetailPage implements OnInit {
   constructor(private alertController: AlertController, private activateRoute: ActivatedRoute, private movieService: MovieService, private nav: NavController, private router: Router, private loadingController: LoadingController, private shareService: ShareService, private authService: AuthService, private imageService: ImagesService) {
 
 
-   }
+  }
   ngOnInit() {
-    this.user_id = '';
-    this.imageService.images=[];
+    this.imageService.images = [];
     this.review_id = this.activateRoute.snapshot.paramMap.get('id');
+  }
+  ionViewWillEnter() {
     if (this.authService.user) {
+      this.user_id = '';
       this.user_id = this.authService.user.id;
-      this.movieService.checkLike(this.review_id).subscribe(state=>{
-        this.like_status = state;
-        console.log(this.like_status);
-      })
-    }
-    console.log('접속자 ID:', this.user_id);
+      this.getLike();
+    };
     this.movieService.getDetailReview(this.review_id).subscribe(result => {
       this.detail_review = result;
-      this.imageService.STORAGE_KEY = this.detail_review.images_id;
-      this.imageService.loadStoragedImage();
-    
-
-      
+      // this.imageService.STORAGE_KEY = this.detail_review.images_id;
+      // this.imageService.loadStoragedImage();
     });
 
-    
   }
-  ngDoCheck() {
-  }
-  
-  
   //좋아요up 메소드 
-  addliker(id){
-    if(this.authService.user){
-      this.shareService.addliker(id).subscribe();
-      this.like_status= !this.like_status;
+  addliker(id) {
+    if (this.authService.user) {
+      this.shareService.addliker(id).subscribe(result => this.like_status = result['state']);
       return;
     }
     this.router.navigateByUrl('/login');
   }
+  getLike() {
+    this.movieService.checkLike(this.review_id).subscribe(state => {
+      this.like_status = state;
+    })
+
+  }
   //편집 page 로 이동
-  gotoEdit(id){
+  gotoEdit(id) {
     this.router.navigate(['review/edit', id]);
   }
 
@@ -81,10 +76,8 @@ export class DetailPage implements OnInit {
             this.loading.present();
           })
           this.movieService.deleteReview(this.review_id).subscribe(res => {
-            console.log('삭제완료')
           });
           setTimeout(() => {
-            // this.nav.back();
             this.loading.dismiss();
             this.router.navigate(['review/list', this.detail_review.reviewlist_id]);
 
@@ -129,7 +122,4 @@ export class DetailPage implements OnInit {
     });
     await alert.present();
   }
-
-
-
 }

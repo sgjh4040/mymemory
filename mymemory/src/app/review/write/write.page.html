@@ -49,8 +49,11 @@
             <ion-input placeholder="감독" value="{{movie.director?.name}}" formControlName="director"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="개봉일" value="{{movie.release_date}}" formControlName="release_date"></ion-input>
-          </ion-item>
+              <ion-datetime class="pub" [doneText]="'저장'" [cancelText]="'취소'" [pickerOptions]="dateOptions"
+                displayFormat="YYYY-MM-DD" placeholder="개봉일" value="{{movie?.release_date | date : 'yyyy-MM-dd'}}"
+                formControlName="release_date">
+              </ion-datetime>
+            </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>

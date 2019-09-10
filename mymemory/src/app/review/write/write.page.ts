@@ -16,6 +16,7 @@ export class WritePage implements OnInit {
   list_id: string;
   reviewForm: FormGroup;
   movie={};
+  rating= 0;
   nowdate:String =new Date().toISOString();
 
 
@@ -47,7 +48,6 @@ export class WritePage implements OnInit {
     let that=this;
     this.reviewForm.value.reviewlist_id= this.list_id;
     this.reviewForm.value.images_id=this.imageService.STORAGE_KEY;
-    console.log('저장내용',this.reviewForm.value);
     this.movieService.writeReview(this.reviewForm.value).subscribe();
 
     //서버 저장 시간 텀을 두기위해.

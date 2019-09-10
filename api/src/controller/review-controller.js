@@ -177,7 +177,7 @@ var write = {
                     if (err) {
                         return res.status(400).json({ 'msg': err });
                     }
-                    return res.status(201).json({msg: '좋아요 감사해요!'});
+                    return res.status(201).json({msg: '좋아요 감사해요!',state:true});
                 });
 
             }else{
@@ -186,7 +186,7 @@ var write = {
                         return res.status(400).json({ 'msg': err });
                     }
                     
-                    return res.status(201).json({ msg: '다시 좋아요 해주세요..' });
+                    return res.status(201).json({ msg: '다시 좋아요 해주세요..',state:false});
                 });
                
             }

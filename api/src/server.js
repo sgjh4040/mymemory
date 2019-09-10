@@ -7,8 +7,9 @@ const port        = process.env.PORT || 5000;
 const cors        = require('cors');
 const webSocket = require('./socket');
 const logger = require('morgan');
-const routes = require('./routes');
+const globalRouter = require("./routes/global");
 const listRouter = require('./routes/list');
+const reviewRouter = require('./routes/review');
 const app = express();
 
 app.use(logger('dev'));
@@ -22,15 +23,12 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 const passportMiddleware = require('./middleware/passport');
 passport.use(passportMiddleware);
- 
-// Demo Route (GET http://localhost:5000)
-app.get('/', function(req, res) {
-  return res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
- 
 
-app.use('/api', routes);
 app.use('/api/list',listRouter);
+app.use('/api/review',reviewRouter);
+app.use('/api',globalRouter);
+
+
  
 mongoose.connect(config.db, { useNewUrlParser: true , useCreateIndex: true});
  

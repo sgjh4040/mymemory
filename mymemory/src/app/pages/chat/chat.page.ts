@@ -26,9 +26,9 @@ export class ChatPage implements OnInit {
     this.socket.fromEvent('users-changed').subscribe(data => {
       let user = data['user'];
       if (data['event'] === 'left') {
-        this.showToast('User left: ' + user);
+        this.showToast('채팅방을 나갔습니다: ' + user);
       } else {
-        this.showToast('User joined: ' + user);
+        this.showToast('채팅방에 참여합니다.: ' + user);
       }
     });
  

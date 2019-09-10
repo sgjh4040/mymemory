@@ -71,6 +71,19 @@ export class MovieService {
       })
     )
   };
+  //리뷰 수정
+  editReview(data,review_id){
+    return this.http.patch(`${this.serverurl}/api/review/${review_id}`,data)
+    .pipe(
+      tap(res => {
+        this.showAlert('정상적으로 수정되었습니다.','성공');
+      }),
+      catchError(e => {
+        this.showAlert(e.error.msg,'오류');
+        throw new Error(e);
+      })
+    )
+  };
   //director 검색
   searchDirector(id:any): Observable<any>{
     return this.http.get(`${this.detailurl}/movie/${id}/credits?api_key=${this.apiKey}`)
@@ -81,7 +94,6 @@ export class MovieService {
         results['director']= a.filter(res1=>{
           return (res1.job=='Director')
         }).filter(res2=>{
-          console.log('res2',res2.department);
           return (res2.department=='Directing')
         })
         return results['director'];
@@ -113,7 +125,6 @@ export class MovieService {
     return this.http.get(`${this.movieurl}/${type}?language=ko-kr&api_key=${this.apiKey}&query=${encodeURI(title)}`)
     .pipe(
       map(results => {
-        console.log("영화검색결과",results['results']);
         return results['results']
       })
     );
@@ -139,9 +150,6 @@ export class MovieService {
   detailCgv(id): Observable<any>{
     return this.http.get(`${this.serverurl}/api/cgvdetail/${id}`);
   }
-  
-  
-
   //review detail 불러오기
   getDetailReview(id){
     return this.http.get(`${this.serverurl}/api/review/detail/${id}`);
@@ -154,7 +162,7 @@ export class MovieService {
 
   //like 상태 확인
   checkLike(id){
-    return this.http.get(`${this.serverurl}/api/reviewup/state/${id}`)
+    return this.http.get(`${this.serverurl}/api/review/state/${id}`)
   }
 
   //Genre id => 장르

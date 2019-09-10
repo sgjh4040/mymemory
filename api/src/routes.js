@@ -10,43 +10,26 @@ var kakaoController = require('./controller/kakaoController');
 var kakaoApi = require('./kakaoapi/api');
 
 
-routes.get('/', (req, res) => {
-    return res.send('Hello, this is the API!');
-});
+// //review 작성
+// routes.post('/review', passport.authenticate('jwt', { session: false }), reviewController.registerReviews);
+// //review 수정
+// routes.patch('/review/:id',passport.authenticate('jwt', { session: false }),
+// reviewController.editReview)
+// //리뷰 삭제
+// routes.delete('/review/:id', reviewController.deleteReview);
 
-routes.post('/register', userController.registerUser);
-routes.post('/login', userController.loginUser);
+// //review 불러오기(list id값으로)
+// routes.get('/review/:id', reviewController.showreview);
 
-//list 작성
-routes.post('/list', passport.authenticate('jwt', { session: false }), reviewController.registerlist);
-
-//list 불러오기
-routes.get('/list', passport.authenticate('jwt', { session: false }), reviewController.showlists);
-//list 삭제
-routes.delete('/list/:id', reviewController.deletelist);
-
-
-
-//review 작성
-routes.post('/review', passport.authenticate('jwt', { session: false }), reviewController.registerReviews);
-//review 수정
-routes.patch('/review/:id',passport.authenticate('jwt', { session: false }),
-reviewController.editReview)
-//리뷰 삭제
-routes.delete('/review/:id', reviewController.deleteReview);
-
-//review 불러오기(list id값으로)
-routes.get('/review/:id', reviewController.showreview);
-
-//review 불러오기(review id값으로)
-routes.get('/review/detail/:id', reviewController.showDetailReview);
+// //review 불러오기(review id값으로)
+// routes.get('/review/detail/:id', reviewController.showDetailReview);
 
 
 //리뷰 검색(title로)
-routes.get('/search/review/:id', reviewController.findReviewBytitle);
+routes.get('/review/search/:id', reviewController.findReviewBytitle);
 
 //리뷰 좋아요 up
-routes.get('/search/reviewup/:id', passport.authenticate('jwt', { session: false }), reviewController.addliker);
+routes.get('/review-like/:id', passport.authenticate('jwt', { session: false }), reviewController.addliker);
 
 //좋아요 상태 확인
 routes.get('/reviewup/state/:id', passport.authenticate('jwt', { session: false }),

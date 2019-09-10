@@ -9,11 +9,9 @@ let ListPage = class ListPage {
         this.router = router;
         this.list = null;
         route.params.subscribe(val => {
-            console.log('bbbb');
             this.list_id = this.activateRoute.snapshot.paramMap.get('id');
             this.movieService.getreview(this.list_id).subscribe(res => {
                 this.list = res;
-                console.log('this.list', this.list);
             });
         });
     }
