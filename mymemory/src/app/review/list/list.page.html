@@ -27,7 +27,7 @@
 
       <ion-col size='6' *ngFor="let review of list" (click)="godetailreview(review._id)">
         <ion-card>
-          <img src="../../../assets/icon/movie.png" *ngIf="!review.poster_path" />
+          <img src="../../../assets/icon/movie.jpg" *ngIf="!review.poster_path" />
           <img src="https://image.tmdb.org/t/p/w500{{review.poster_path}}" *ngIf="review.poster_path" />
           <ion-card-header>
             <ion-card-subtitle>

@@ -54,10 +54,10 @@ export class EditPage implements OnInit {
 
   onSubmit() {
     let that = this;
-    this.reviewForm.value.reviewlist_id = this.review_id;
+    this.reviewForm.value.reviewlist_id = this.movie['reviewlist_id'];
     console.log(this.reviewForm.value);
     this.movieService.editReview(this.reviewForm.value,this.review_id).subscribe(()=>{
-      that.router.navigateByUrl(`/review/list/${that.review_id}`)
+      that.router.navigateByUrl(`/review/list/${that.movie['reviewlist_id']}`)
     });
   };
   async openSearchMovieModal() {

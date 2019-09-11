@@ -3,7 +3,7 @@ var Review = require('../models/review');
 var ObjectId = require('mongodb').ObjectId;
 
 var write = {
-    //reviewlist 삭제
+    //리뷰리스트 삭제
     deletelist:(req,res)=>{
         let reviewlist_id =req.params.id;
         console.log(reviewlist_id);
@@ -68,7 +68,7 @@ var write = {
             }
         })
     },
-    //Review title search
+    //리뷰 title search
     
     findReviewBytitle: (req,res)=>{
         let searchTerm = req.params.id;
@@ -88,7 +88,7 @@ var write = {
             return res.json(result)
         });
     },
-    //review 삭제
+    //리뷰 삭제
     deleteReview: (req, res) => {
         let review_id = req.params.id;
         Review.findByIdAndDelete(review_id, (err, result) => {
@@ -103,6 +103,8 @@ var write = {
     editReview: (req,res)=>{
         let writer = req.user._id;
         req.body.writer = writer;
+        let tags = (req.body.tags).split(',');//tags string 배열로 분리
+        req.body.tags = tags;
 
         Review.findByIdAndUpdate(req.params.id,{
             $set: req.body
@@ -130,7 +132,6 @@ var write = {
     },
     //리뷰 작성( collection 따로 되어 있을때)
     registerReviews: (req, res) => {
-        console.log(req.body.tags);
         let tags = (req.body.tags).split(',');//tags string 배열로 분리
         req.body.tags = tags;
         let newReview = Review(req.body);

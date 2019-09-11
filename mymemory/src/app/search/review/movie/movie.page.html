@@ -27,7 +27,7 @@
     <ion-row>
       <ion-col size='12' *ngFor="let review of (results|async)" (click)="godetailreview(review._id)">
         <ion-card>
-          <img src="../../../assets/icon/movie.png" *ngIf="!review.backdrop_path" />
+          <img src="../../../assets/icon/movie.jpg" *ngIf="!review.backdrop_path" />
           <img src="https://image.tmdb.org/t/p/w500{{review.backdrop_path}}" *ngIf="review.backdrop_path" />
           <ion-card-header>
             <ion-card-subtitle>
