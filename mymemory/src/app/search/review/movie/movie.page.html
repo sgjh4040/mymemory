@@ -15,8 +15,8 @@
 
 <ion-content>
   <ion-item lines="none">
-    <ion-select [(ngModel)]='role' interface="popover" slot="start">
-      <ion-select-option value="review">최신순</ion-select-option>
+    <ion-select [(ngModel)]='role'(ionChange)="searchChanged($event)" interface="popover" slot="start" placeholder="정렬">
+      <ion-select-option value="created_date">최신순</ion-select-option>
       <ion-select-option value="liker_cnt">추천순</ion-select-option>
       <ion-select-option value="view_cnt">조회순</ion-select-option>
     </ion-select>

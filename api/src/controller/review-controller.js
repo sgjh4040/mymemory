@@ -75,9 +75,10 @@ var write = {
         let role = req.query.role;
         console.log('role',role);
         switch(role){
+            case 'created_date': {role='created_date';break;}
             case 'view_cnt': {role='view_cnt';break;}
             case 'liker_cnt': {role= 'liker_size';break;}
-            default: {role='liker_size';}
+            default: {role='created_date';}
         }
         console.log('role',role);
         Review.find({title:{$regex: searchTerm}}).sort('-'+role).exec((err, result) => {

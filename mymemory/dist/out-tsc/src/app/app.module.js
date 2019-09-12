@@ -18,13 +18,13 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { LoadingService } from './services/loading.service';
 import { SocketIoModule } from 'ngx-socket-io';
-const config = { url: 'http://172.30.1.52:5000', options: {} };
+const config = { url: 'http://10.0.2.2:5000', options: {} };
 export function jwtOptionsFactory(storage) {
     return {
         tokenGetter: () => {
             return storage.get('access_token');
         },
-        whitelistedDomains: ['172.30.1.52:5000']
+        whitelistedDomains: ['10.0.2.2:5000']
     };
 }
 let AppModule = class AppModule {

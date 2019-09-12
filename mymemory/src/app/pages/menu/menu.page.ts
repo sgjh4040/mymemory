@@ -30,6 +30,7 @@ export class MenuPage implements OnInit {
    }
 
   ngOnInit() {
+
     if(this.authService.isAuthenticated()){
       this.auth_state=true;
     }else{
@@ -37,6 +38,15 @@ export class MenuPage implements OnInit {
     }
 
   }
+  ionViewWillEnter(){
+    if(this.authService.isAuthenticated()){
+      this.auth_state=true;
+    }else{
+      this.auth_state=false;
+    }
+  }
+
+
   login(){
     this.nav.setDirection('root');
     this.router.navigateByUrl('/login')

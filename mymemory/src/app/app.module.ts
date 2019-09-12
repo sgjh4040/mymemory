@@ -21,7 +21,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import { LoadingService } from './services/loading.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+const config: SocketIoConfig = { url: 'http://192.168.123.100:5000', options: {} };
 
 
 
@@ -30,7 +30,7 @@ export function jwtOptionsFactory(storage) {
     tokenGetter: () => {
       return storage.get('access_token');
     },
-    whitelistedDomains: ['localhost:5000']
+    whitelistedDomains: ['192.168.123.100:5000']
   }
 }
  

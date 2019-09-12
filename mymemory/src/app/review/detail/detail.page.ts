@@ -31,6 +31,7 @@ export class DetailPage implements OnInit {
   }
   ionViewWillEnter() {
     if (this.authService.user) {
+      console.log('this.authService.user',this.authService.user);
       this.user_id = '';
       this.user_id = this.authService.user.id;
       this.getLike();
@@ -49,6 +50,11 @@ export class DetailPage implements OnInit {
       return;
     }
     this.router.navigateByUrl('/login');
+    this.alertController.create({
+      message: '로그인부터 해주세요!',
+      header: '비로그인상태',
+      buttons: ['확인']
+    }).then(alert=> alert.present());
   }
   getLike() {
     this.movieService.checkLike(this.review_id).subscribe(state => {

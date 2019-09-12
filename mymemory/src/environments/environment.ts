@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:5000',
+  url: 'http://192.168.123.100:5000',
   apiKey: 'e02050f991ddedb779571b20eb62034b'
 }
 

@@ -48,12 +48,9 @@ export class WritePage implements OnInit {
     let that=this;
     this.reviewForm.value.reviewlist_id= this.list_id;
     this.reviewForm.value.images_id=this.imageService.STORAGE_KEY;
-    this.movieService.writeReview(this.reviewForm.value).subscribe();
-
-    //서버 저장 시간 텀을 두기위해.
-    setTimeout(function(){
-      that.router.navigateByUrl(`/review/list/${that.list_id}`)
-    },500);
+    this.movieService.writeReview(this.reviewForm.value).subscribe(res=>{
+      this.router.navigateByUrl(`/review/list/${that.list_id}`);
+    });
 
 
     

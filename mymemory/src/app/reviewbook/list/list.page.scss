@@ -1,3 +1,12 @@
+@keyframes flashAnimation{
+    from{
+        width: 0%;
+    }
+    to{
+        width: 20%;
+    }
+}
+
 ion-card-title {
     margin-left: 20px;
     font-size: 20px;
@@ -22,4 +31,21 @@ ion-chip {
 
 .review-cnt{
     letter-spacing: 0.7px;
+}
+.book-wrap{
+    display: flex;
+    ion-card:first-child{
+        width: 100%;
+    }
+    ion-card:nth-child(2){
+        display: flex;
+        animation: flashAnimation 0.5s linear;
+        animation-fill-mode: forwards;
+        align-items: center;
+        justify-content: center;
+        ion-icon {
+            font-size: 30px;
+          }
+    }
+
 }

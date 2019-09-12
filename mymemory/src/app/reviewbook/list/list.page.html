@@ -18,8 +18,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <div *ngFor="let book of list">
-    <ion-icon *ngIf="editButton" color="danger" name="trash" slot="end" (click)="deleteBook(book._id)"></ion-icon>
+  <div class="book-wrap" *ngFor="let book of list">
     <ion-card [routerLink]="['/review/list',book._id]">
       <div class="card-top-wrap">
         <ion-item>
@@ -37,6 +36,10 @@
         </ion-chip>
       </div>
     </ion-card>
+    <ion-card *ngIf="editButton" color="danger"(click)="deleteBook(book._id)">
+      <ion-icon name="close"></ion-icon>
+    </ion-card>
+    
   </div>
 
 

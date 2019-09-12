@@ -29,8 +29,9 @@ export class ListPage implements OnInit {
         this.loading.dismissLoading();
       })
     })
-
-    
+  }
+  ionViewWillLeave() {
+    this.editButton=false;
   }
   deleteBook(id){
     this.movieService.deleteBook(id).subscribe(res=>{

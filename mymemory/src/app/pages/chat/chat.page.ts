@@ -21,6 +21,7 @@ export class ChatPage implements OnInit {
     let name = this.authService.user.email;
     this.currentUser = name;
     
+    //채팅방 들어왔을때 socket에 이름 저장
     this.socket.emit('set-name', name);
  
     this.socket.fromEvent('users-changed').subscribe(data => {

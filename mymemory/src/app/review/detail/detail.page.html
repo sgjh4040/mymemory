@@ -77,15 +77,6 @@
       
 
     </ion-row>
-    <ion-row>
-        <ion-col size='3' *ngFor="let img of imageService.images; index as pos">
-          <ion-img [src]="img.path"></ion-img>
-        </ion-col>
-        <ion-col size='3'>
-
-          <ion-button expand="full" color='danger' (click)="imageService.selectImage()">추가</ion-button>
-        </ion-col>
-      </ion-row>
 
   </ion-grid>
 
@@ -93,7 +84,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="openDeleteAlert()">
+      <ion-button (click)="openDeleteAlert()" *ngIf='detail_review?.writer==user_id'>
         <ion-icon name="trash" color="danger" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>

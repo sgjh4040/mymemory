@@ -189,7 +189,7 @@ export class ImagesService {
     });
     await loading.present();
 
-    this.http.post(`http://${environment.url}/api/images/`, formData)
+    this.http.post(`http://192.168.123.100:5000/api/images/`, formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
@@ -205,7 +205,7 @@ export class ImagesService {
         console.log('succes',res['success']);
         if (res['success']) {
           this.presentToast('File upload complete.')
-          this.profile= `http://${environment.url}/api/images/${this.authService.user.id}?${(new Date().getTime())}`
+          this.profile= `${environment.url}/api/images/${this.authService.user.id}?${(new Date().getTime())}`
           
         } else {
           this.presentToast('File upload failed.')

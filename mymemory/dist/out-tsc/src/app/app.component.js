@@ -15,7 +15,6 @@ let AppComponent = class AppComponent {
         // this.initializeApp();
     }
     initializeApp() {
-        console.log('initializeApp');
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();

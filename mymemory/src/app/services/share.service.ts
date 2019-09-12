@@ -40,11 +40,6 @@ export class ShareService {
     alert.then(alert => alert.present());
   }
   socialShare(message,image){
-    // this.socialSharing.shareWithOptions(this.options).then((res)=>{
-    //   console.log('res',res);
-    // }).catch(e=>{
-    //   console.log('e',e);
-    // })
     this.socialSharing.share(message,null,[image]).then((res)=>{
       console.log('res',res);
     }).catch(e=>{

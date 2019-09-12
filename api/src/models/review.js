@@ -15,6 +15,7 @@ var ReviewSchema = new Schema({
     },
     title: String,
     release_date:{type: Date, 'default': Date.now},
+    created_date:{type: Date, 'default': Date.now},
     director: String,
     overview: String,
     genre: String,

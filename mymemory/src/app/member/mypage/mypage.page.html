@@ -9,12 +9,10 @@
 </ion-header>
 
 <ion-content>
-  <h3 *ngIf="imageService.images.length == 0" text-center>프로필 설정해주세요!</h3>
-
-
   <ion-avatar style="margin: 10pt auto;">
-    <img [src]='imageService.profile'>
-    <!-- <img [src]="imageService.images[0]?.path" *ngIf="imageService.images.length != 0"> -->
+    <img [src]='imageService.profile'*ngIf='imageService.profile'>
+    <img src='../../../assets/icon/account.png'*ngIf='!imageService.profile'>
+   
   </ion-avatar>
 
   <ion-item>

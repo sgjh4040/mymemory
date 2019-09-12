@@ -29,14 +29,10 @@ export class CreatePage implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.bookIcon);
-    console.log(this.reviewlistForm.value)
     this.movieService.writeReviewList(this.reviewlistForm.value).subscribe();
-    // this.router.navigateByUrl('reviewbook/list')
+
     this.router.navigate(['reviewbook/list'])
-    // this.nav.navigateBack(['/']).then(()=>{
-    //   this.router.navigateByUrl('reviewbook/list')
-    // });
+   
   }
   click(img){
     this.bookIcon=img;

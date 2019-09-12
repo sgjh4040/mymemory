@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
-import { Observable } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
@@ -14,10 +13,6 @@ export class ListPage implements OnInit {
   list= null;
 
   constructor(private activateRoute: ActivatedRoute,private movieService: MovieService,route: ActivatedRoute,private router: Router,private loading:LoadingService) { 
-    // route.params.subscribe(val=>{
-    //   this.loading.presentLoading().then(()=>{
-    //   })
-    // });
   }
  
 
@@ -27,7 +22,7 @@ export class ListPage implements OnInit {
    
   }
   ionViewWillEnter(){
-    console.log("ionViewWillEnter");
+  
     this.getReviews();
   }
   getReviews(){

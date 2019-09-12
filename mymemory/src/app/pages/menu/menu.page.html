@@ -3,7 +3,7 @@
 
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Menu</ion-title>
+        <ion-title>메뉴</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -18,21 +18,21 @@
           </ion-item>
           <ion-item routerLink="/menu/moviemain" routerDirection="root" >
             <ion-label>
-              Search Movie
+              영화 검색
             </ion-label>
           </ion-item>
           <ion-item routerLink="/mypage" *ngIf="auth_state">
             <ion-label>
-                Mypage
+                마이페이지
               </ion-label>
           </ion-item>
           <ion-item tappable (click)="login()" *ngIf="!auth_state">
             <ion-icon name="log-In" slot="start"></ion-icon>
-            LogIn
+            로그인
           </ion-item>
           <ion-item tappable (click)="logout()" *ngIf="auth_state">
             <ion-icon name="log-out" slot="start"></ion-icon>
-            Logout
+            로그아웃
           </ion-item>
 
         </ion-menu-toggle>
