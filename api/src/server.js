@@ -28,8 +28,6 @@ app.use('/api/list',listRouter);
 app.use('/api/review',reviewRouter);
 app.use('/api',globalRouter);
 
-
- 
 mongoose.connect(config.db, { useNewUrlParser: true , useCreateIndex: true});
  
 const connection = mongoose.connection;

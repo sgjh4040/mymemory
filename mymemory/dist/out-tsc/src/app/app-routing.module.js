@@ -7,7 +7,7 @@ const routes = [
     { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
     { path: 'login', loadChildren: './member/login/login.module#LoginPageModule' },
     { path: 'main', loadChildren: './pages/main/main.module#MainPageModule' },
-    { path: 'reviewbook/list', loadChildren: './reviewbook/list/list.module#ListPageModule', canActivate: [AuthGuardService] },
+    { path: 'reviewbook/list', loadChildren: './reviewbook/list/list.module#ListPageModule', vate: [AuthGuardService] },
     { path: 'reviewbook/create', loadChildren: './reviewbook/create/create.module#CreatePageModule' },
     { path: 'review/list/:id', loadChildren: './review/list/list.module#ListPageModule' },
     { path: 'review/write/:id', loadChildren: './review/write/write.module#WritePageModule' },

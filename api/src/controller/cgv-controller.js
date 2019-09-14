@@ -1,8 +1,8 @@
-var client = require('cheerio-httpcli');
-var fs = require('fs');
+const client = require('cheerio-httpcli');
+const fs = require('fs');
 
 // var savepath = "cgv.html";
-var url = "http://www.cgv.co.kr/movies/";
+const url = "http://www.cgv.co.kr/movies/";
 var param = {};
 // var outfile = fs.createWriteStream(savepath);
 
@@ -18,7 +18,6 @@ var findmovies = (req, res) => {
             console.log("Error", err);
             return;
         }
-        console.log($(".sect-movie-chart").find("li").length)
         var body = $(".sect-movie-chart").find("li").each(function (idx) {
             let a = new Object();
 
@@ -70,10 +69,10 @@ var detailmovie = (req,res)=>{
         results.thumbImage= $(".thumb-image").children().attr('src');
 
         let spec =$(".spec").text().replace(/(\s*)/g, "");
-        let a =spec.indexOf('장르');
+        let genre =spec.indexOf('장르');
         //spec
-        results.spec1 = spec.substring(0,a);
-        results.spec2 = spec.substring(a);
+        results.spec1 = spec.substring(0,genre);
+        results.spec2 = spec.substring(genre);
 
         //예매율
         // console.log("예매율",$(".percent").text());

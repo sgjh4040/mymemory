@@ -21,6 +21,7 @@ export class ImagesService {
   images = [];
   reviewId = '123';
   profile='';
+  serverurl = environment.url;
 
   constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
     private actionSheetController: ActionSheetController, private toastController: ToastController,
@@ -189,7 +190,7 @@ export class ImagesService {
     });
     await loading.present();
 
-    this.http.post(`http://192.168.123.100:5000/api/images/`, formData)
+    this.http.post(`${this.serverurl}/api/images/`, formData)
       .pipe(
         finalize(() => {
           loading.dismiss();
@@ -274,7 +275,5 @@ export class ImagesService {
     let entry = await this.file.resolveLocalFilesystemUrl(imagePath);
     let file = await this.getfile(entry);
     this.readFile(file);
-
-
   }
 }

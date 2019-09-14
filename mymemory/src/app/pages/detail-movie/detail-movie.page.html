@@ -35,7 +35,8 @@
     <ion-slides [options]="slideOpts">
       <ion-slide *ngFor="let cast of (casts|async)">
         <ion-card>
-          <img src='https://image.tmdb.org/t/p/w120_and_h133_face{{cast.profile_path}}'>
+          <img src='https://image.tmdb.org/t/p/w120_and_h133_face{{cast.profile_path}}' *ngIf = "cast.profile_path">
+          <img src='../../../assets/icon/account.png' *ngIf = "!cast.profile_path">
           <ion-card-content>
             {{cast.name}}
           </ion-card-content>
